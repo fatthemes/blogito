@@ -1,0 +1,54 @@
+a {
+    //color: $color__link;
+
+    &:visited {
+	//color: $color__link-visited;
+    }
+    &:hover,
+	&:focus,
+	&:active {
+	//color: $color__link-hover;
+    }
+    &:focus {
+	//outline: #00FF00 dotted thick; //outline: none;
+    }
+    &:hover,
+	&:active {
+	outline: none;
+    }
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigation a {
+    border-bottom: none;
+}
+
+.edit-link {
+    margin-left: 2em;
+    font-weight: 700;
+}
+
+a > img:hover {
+    //opacity: 0.7;
+    //transition: .5s;
+}
+
+.featured-image a:hover {
+    //border: none;
+}
+
+.comments-link, .blogito-wpp-all-views {
+    margin-left: $grid-gutter-width/2;
+    float: right;
+    a {
+        display: inline-block;
+        margin-top: -0.25rem;
+        svg {
+            margin-bottom: -0.25rem;
+        }
+    }
+}
+
+.blogito-wpp-all-views {
+    //float: right;
+    //margin: 0 0.75rem;
+}

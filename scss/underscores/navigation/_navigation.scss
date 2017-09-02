@@ -1,0 +1,97 @@
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+@import "links";
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+@import "menus";
+
+.blogito-next-article, .blogito-previous-article {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .75em;
+    letter-spacing: .05em;
+    color:#999;
+}
+
+//.nav-previous a, .nav-next a,
+.blogito-next-article-title, .blogito-previous-article-title {
+    //display:block;
+    //border-top: 1px solid #000;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color:#444;
+    //padding: .5em 0;
+}
+
+.nav-links {
+    a:hover > .blogito-next-article-title,
+	a:hover > .blogito-previous-article-title,
+	a:hover > .blogito-next-article,
+	a:hover > .blogito-previous-article,{
+	//color:$color__link-hover;
+    }
+}
+
+.nav-previous {
+    padding-right: ( $grid-gutter-width / 2 );
+}
+
+.nav-next {
+    padding-left: ( $grid-gutter-width / 2 );
+}
+
+.post-navigation {
+    @extend .col-md-12;
+}
+
+#blogito-load-more .btn {
+    text-align: center;
+    border: 1px solid $color__border-input;
+    background-color: #000;
+    color:#fff;
+
+    font-family: $font__secondary;
+    font-size: .75rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    transition: .5s;
+
+    padding: .75em 1em;
+    margin: 0;
+    &:hover, &.current {
+	//background-color: $color__text-main;
+	background-color: #fff;
+	color: #707070;
+    }
+}
+
+.pagination {
+    text-align: center;
+    .page-numbers {
+	border: 1px solid $color__border-input;
+	background-color: #fff;
+	font-family: $font__secondary;
+	font-size: .75rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	transition: .5s;
+	color: #707070;
+	padding: .5em .75em;
+	margin: 0;
+	&:hover, &.current {
+	    //background-color: $color__text-main;
+	    background-color: #000;
+	    color:#fff;
+	}
+    }
+}
+
+.page-links {
+    text-align: center;
+    @extend .h5;
+}
