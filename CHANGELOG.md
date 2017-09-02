@@ -1,6 +1,6 @@
 # Changes to Blogito
 
-## [1.0] - 2017-09-01
+## [1.0.0] - 2017-09-02
 
 ### Added
-- Initial release.
+- Public release.
