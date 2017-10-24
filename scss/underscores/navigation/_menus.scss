@@ -332,7 +332,6 @@
     z-index: 1048;
     .left-header,
     .main-navigation,
-    .left-nav-social,
     .site-info,
     .widget {
         //max-width: 240px;
@@ -491,45 +490,74 @@
     }
 }
 
-.nav-social,
-.left-nav-social {
-    //padding: 0 0 2em;
-    //width: 100%;
-    text-align: center;
-    a {
-        display: inline-block;
-        //width: 1rem;
-        //height: 1rem;
-        //border: 1px solid #404040;
-        //border-radius: 50%;
-        //width: 1.5em;
-        //height: 1.5em;
-        //padding: .125rem;
-        color: $color__text-main;
-        border-bottom: none;
-        &:hover svg {
-            //color: $color__link-hover;
-            transition: .5s;
-        }
-        svg {
-            //width: 1rem;
-            height: 1rem;
-            margin: 0 .75em;
-            //margin:auto;
-            //width:1em;
-            //height:1em;
-        }
+.top-menu-container,
+.social-menu-container {
+    display: inline-block;
+    float: right;
+}
+
+#social-menu {
+    float:right;
+    margin: 0 24px 0 30px;
+    li {
+	a {
+	    padding: 12px;
+	    margin-top: 30px;
+	    vertical-align: top;
+	    margin-top: 26px;
+	    margin-right: 6px;
+	    .screen-reader-text {
+		position: absolute !important;
+		height: 1px;
+		width: 1px;
+	    }
+	}
+	a[href*="facebook.com"] {
+	    background: url(img/facebook.svg)  no-repeat;
+	    margin-right: 0;
+	}
+
+	a[href*="linkedin.com"] {
+	    background: url(img/linkedin2.svg)  no-repeat;
+	}
+
+	a[href*="instagram.com"] {
+	    background: url(img/instagram.svg)  no-repeat;
+	}
+	
+	a[href*="flickr.com"] {
+	    background: url(img/flickr3.svg)  no-repeat;
+	}
+	
+	a[href*="plus.google.com"] {
+	    background: url(img/google-plus.svg)  no-repeat;
+	}
+	
+	a[href*="pinterest.com"] {
+	    background: url(img/pinterest2.svg)  no-repeat;
+	}
+	
+	a[href*="twitter.com"] {
+	    background: url(img/twitter.svg)  no-repeat;
+	}
+	
+	a[href*="youtube.com"] {
+	    background: url(img/youtube.svg)  no-repeat;
+	}
     }
 }
 
-.nav-social {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 1em 2em 1em 1em;
-}
-
-.left-nav-social {
-    margin-bottom: $grid-gutter-width;
+.left-sidebar-content {
+    .social-menu-container {
+	float: none;
+	#social-menu {
+	    margin-left: 0;
+	    li {
+		display: inline-block;
+		a {
+		    width: auto;
+		}
+	    }
+	}
+    }
 }
