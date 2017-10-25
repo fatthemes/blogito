@@ -34,7 +34,6 @@
 			<button class="blogito-search-panel-close" title="<?php esc_attr_e( 'Close', 'blogito' ); ?>"><svg><path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path></svg></button>
 			<?php get_search_form(); ?>
 			</div>
-			<?php get_sidebar( 'menu-social' ); ?>
 			<div class="menu-logo">
 			<?php
 			if ( has_custom_logo() ) :
@@ -47,8 +46,19 @@
 			<?php
 			wp_nav_menu(
 				array(
+					'theme_location' => 'social',
+					'menu_id' => 'social-menu',
+					'container_class' => 'social-menu-container',
+					'depth'           => 1,
+					'link_before'     => '<span class="screen-reader-text">',
+					'link_after'      => '</span>',
+				)
+			);
+			wp_nav_menu(
+				array(
 					'theme_location' => 'top',
 					'menu_id' => 'top-menu',
+					'container_class' => 'top-menu-container',
 				)
 			);
 			?>

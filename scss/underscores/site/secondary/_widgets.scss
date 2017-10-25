@@ -55,35 +55,9 @@
     }
 }
 
-.widget_social_media_icons_widget_by_fat {
-    text-align: center;
-    li {
-        display: inline-block;
-        margin-bottom: 0;
-        a {
-            //padding: 1rem;
-            svg {
-                height: 1.25rem;
-                width: auto;
-                margin: 0 .5rem;
-            }
-        }
-    }
-}
-
 #secondary {
     .widget {
         padding: ( $grid-gutter-width);
-    }
-    .widget_social_media_icons_widget_by_fat {
-        li {
-            margin: 0 .25rem;
-            border-radius: 50%;
-            background-color: #fff;
-            padding-top: .5rem;
-            width: 36px;
-            height: 36px;
-        }
     }
 }
 
@@ -248,32 +222,6 @@
             height: 80px;
             border-radius: 50%;
             //margin-right: $grid-gutter-width/2;
-        }
-    }
-}
-
-.menu-social-widget {
-    //display: inline-block;
-    float: right;
-    margin-left: $grid-gutter-width/2;
-    margin-right: $grid-gutter-width/2;
-    background-color: $color__background-body;
-    .widget-title {
-        display: none;
-    }
-    .widget_social_media_icons_widget_by_fat {
-        //display: inline-block;
-        margin-bottom: 0;
-        margin-left: 1rem;
-        li {
-            a {
-                padding: .875rem 0;
-            }
-        }
-        svg {
-            //width:12px;
-            height: 1rem;
-            margin: 0 .375rem;
         }
     }
 }
@@ -501,8 +449,4 @@
 	}
     }
 
-}
-
-.widget_social_media_icons_widget_by_fat li, .widget.widget_mc4wp_form_widget, .widget-title span {
-    background-color: #fff;
 }

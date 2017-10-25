@@ -48,6 +48,7 @@ if ( ! function_exists( 'blogito_setup' ) ) :
 		array(
 			'primary' => esc_html__( 'Left Menu', 'blogito' ),
 			'top' => esc_html__( 'Top Menu', 'blogito' ),
+			'social' => esc_html__( 'Social Menu', 'blogito' ),
 		)
 	);
 
