@@ -1713,11 +1713,16 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
         top: 0; }
       .navbar-navigation ul ul li:last-of-type a {
         border-bottom: none; }
-      .navbar-navigation ul ul .current_page_item > a:after,
-      .navbar-navigation ul ul .current-menu-item > a:after,
-      .navbar-navigation ul ul .current_page_ancestor > a:after,
-      .navbar-navigation ul ul .current-menu-ancestor > a:after {
-        border: none; }
+      .navbar-navigation ul ul .current_page_item > a,
+      .navbar-navigation ul ul .current-menu-item > a,
+      .navbar-navigation ul ul .current_page_ancestor > a,
+      .navbar-navigation ul ul .current-menu-ancestor > a {
+        color: #aeb3b7; }
+        .navbar-navigation ul ul .current_page_item > a:after,
+        .navbar-navigation ul ul .current-menu-item > a:after,
+        .navbar-navigation ul ul .current_page_ancestor > a:after,
+        .navbar-navigation ul ul .current-menu-ancestor > a:after {
+          border: none; }
     .navbar-navigation ul li:hover > ul,
     .navbar-navigation ul li.focus > ul {
       left: auto; }
