@@ -555,7 +555,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	$needle2 = 'page_item_has_children';
 	$haystack = $item->classes;
 	if ( in_array( $needle1, $haystack, true ) || in_array( $needle2, $haystack, true ) ) {
-		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_html__( 'Expand', 'blogito' ) . '">&#43;</span>';
+		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_attr__( 'Expand', 'blogito' ) . '">&#43;</span>';
 	}
 
 	return $item_output;
@@ -609,9 +609,9 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 				?>
 				<div class="col-xs-12 col-md-4">
 				<?php if ( has_post_thumbnail() ) : ?>
-					<a class="related-posts-thumbnail" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="background: url( <?php the_post_thumbnail_url( 'medium' ); ?> ) center no-repeat;background-size: cover;"></a>
+					<a class="related-posts-thumbnail" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" style="background: url( <?php the_post_thumbnail_url( 'medium' ); ?> ) center no-repeat;background-size: cover;"></a>
 				<?php endif; ?>
-				<p><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></p>
+				<p><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
 				</div>
 				<?php
 			endwhile;
