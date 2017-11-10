@@ -56,7 +56,7 @@ pipeline:
       #branch:
       #  exclude: dev
 
-  pushed:
+  push_to_dev:
     image: limestreet/apache-php-7
     environment:
     commands:
