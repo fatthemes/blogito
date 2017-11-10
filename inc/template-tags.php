@@ -287,10 +287,10 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 		$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
 
 		$output .= '<li>';
-		$output .= ( ! empty( $thumb )) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
+		$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
 		$output .= blogito_post_format_icon( $popular->id );
-		$output .= ( ! empty( $post_cat )) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
-		$output .= ( ! empty( $thumb )) ? '</div>' : '';
+		$output .= ( ! empty( $post_cat ) ) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
+		$output .= ( ! empty( $thumb ) ) ? '</div>' : '';
 		$output .= '<h2 class="entry-title"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $popular->title . '</a></h2>';
 		// $output .= ( ! empty ($stats)) ? $stats : "";
 		// $output .= $excerpt;

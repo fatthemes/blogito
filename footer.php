@@ -62,7 +62,7 @@
 	if ( has_custom_logo() ) {
 		the_custom_logo();
 	}
-	echo wp_kses_post( get_theme_mod( 'footer_text', '<p>&copy; ' . date_i18n(__('Y','blogito')) . ' ' . get_bloginfo( 'name' ) . '</p>' ) );
+	echo wp_kses_post( get_theme_mod( 'footer_text', '<p>&copy; ' . date_i18n( __( 'Y', 'blogito' ) ) . ' ' . get_bloginfo( 'name' ) . '</p>' ) );
 	?>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
