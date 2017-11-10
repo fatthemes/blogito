@@ -56,7 +56,7 @@ pipeline:
       #branch:
       #  exclude: dev
 
-  pushed:
+  push_to_dev:
     image: limestreet/apache-php-7
     environment:
     commands:
@@ -64,16 +64,16 @@ pipeline:
       - git config --global user.email "$DOCKER_EMAIL"
       #- git reset --hard
       #- git clean -f
-      - VERSION_LINE=$(grep -Po "Version:\s?\s?\d\d?\.\d\d?\.\d\d?.*" $PWD/style.css)
+      - VERSION_LINE=$(grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" $PWD/style.css)
       #- echo $VERSION_LINE
-      - VERSION=$(echo $VERSION_LINE | grep -Po "\d\d?\.\d\d?\.\d\d?")
+      - VERSION=$(echo $VERSION_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
       #- VERSION=`grep -Po "(\d\d?\.\d\d?\.\d\d?)" <<< "$VERSION_LINE"`
       - sed -i "s/$VERSION_LINE/Version:\ $VERSION+build$DRONE_BUILD_NUMBER/" $PWD/scss/underscores/style.scss
       - sed -i "s/$VERSION_LINE/Version:\ $VERSION+build$DRONE_BUILD_NUMBER/" $PWD/style.css
       #- COMPOSER_THEME_VERSION_LINE=$(grep -Po '"version"\s?\s?:\s?\s?"\d\d?\.\d\d?\.\d\d?.*"' $PWD/composer.json)
       #- echo $COMPOSER_THEME_VERSION_LINE
       #- COMPOSER_THEME_VERSION=$(echo $COMPOSER_THEME_VERSION_LINE | grep -Po "(\d\d?\.\d\d?\.\d\d?)")
-    #- COMPOSER_THEME_VERSION=`grep -Po "(\d\d?\.\d\d?\.\d\d?)" <<< "$COMPOSER_THEME_VERSION_LINE"`
+    #- COMPOSER_THEME_VERSION=`grep -Po "(\d\d?\.\d\d?\.?\d?\d?)" <<< "$COMPOSER_THEME_VERSION_LINE"`
       #- sed -i "s/$COMPOSER_THEME_VERSION_LINE/\"version\"\ :\ \"$COMPOSER_THEME_VERSION+build$DRONE_BUILD_NUMBER\"/" $PWD/composer.json
       #- cat composer.json
       #- git fetch
@@ -107,9 +107,9 @@ pipeline:
     - sleep 15
     - REMOTEURL="http://$THEME_LOW.dev.limestreet.pl/wp-content/themes/$THEME_LOW/style.css"
     #- echo $REMOTEURL
-    - REMOTEVERSION=$(curl $REMOTEURL | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.\d\d?.*" | grep -Po "(\d\d?\.\d\d?\.\d\d?.*)")
+    - REMOTEVERSION=$(curl $REMOTEURL | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
     - echo $REMOTEVERSION
-    - LOCALVERSION=$(cat style.css | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.\d\d?.*" | grep -Po "(\d\d?\.\d\d?\.\d\d?.*)")
+    - LOCALVERSION=$(cat style.css | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
     - echo $LOCALVERSION
     - if [ $REMOTEVERSION != $LOCALVERSION ]; then echo "Wrong theme version - $REMOTEVERSION instead of $LOCALVERSION" && exit 1 ;fi
     - sed -i "s/THEME_SLUG/$THEME_SLUG/g" ./Gruntfile.js

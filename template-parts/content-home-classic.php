@@ -41,7 +41,7 @@
 		</div>
 	<?php else : ?>
 		<div class="entry-content">
-			<a href="<?php the_permalink(); ?>"><button><?php esc_html_e( 'Read more ', 'blogito' ); ?><span class="screen-reader-text"><?php esc_url( the_title() ); ?></span></button></a>
+			<a href="<?php the_permalink(); ?>"><button><?php esc_html_e( 'Read more ', 'blogito' ); ?><span class="screen-reader-text"><?php the_title(); ?></span></button></a>
 		</div>
 	<?php endif; ?>
 	<?php if ( 'post' === get_post_type() ) : ?>

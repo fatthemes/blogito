@@ -15,7 +15,7 @@ if ( is_single() && $has_sidebar ) {
 	$GLOBALS['content_width'] = 692;
 }
 ?>
-<?php $is_active_sidebar = (is_active_sidebar( 'sidebar-1' ) ? '' : ' col-lg-offset-2' ); ?>
+<?php $is_active_sidebar = ( is_active_sidebar( 'sidebar-1' ) ? '' : ' col-lg-offset-2' ); ?>
 <div class="row">
 	<div id="primary" class="content-area<?php echo ( $has_sidebar ? ' col-lg-8' . $is_active_sidebar : ' col-lg-10 col-lg-offset-1' ); // WP XSS OK. ?>">
 	<main id="main" class="site-main row" role="main">

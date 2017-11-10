@@ -287,10 +287,10 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 		$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
 
 		$output .= '<li>';
-		$output .= ( ! empty( $thumb )) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
+		$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
 		$output .= blogito_post_format_icon( $popular->id );
-		$output .= ( ! empty( $post_cat )) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
-		$output .= ( ! empty( $thumb )) ? '</div>' : '';
+		$output .= ( ! empty( $post_cat ) ) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
+		$output .= ( ! empty( $thumb ) ) ? '</div>' : '';
 		$output .= '<h2 class="entry-title"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $popular->title . '</a></h2>';
 		// $output .= ( ! empty ($stats)) ? $stats : "";
 		// $output .= $excerpt;
@@ -468,7 +468,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	<?php endif; ?>
 		svg:hover,a svg:hover,.blogito-author-social-icons a:hover svg {fill: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
 		button,input[type="button"],input[type="reset"],input[type="submit"],.navbar-navigation .current_page_item > a:after,.navbar-navigation .current-menu-item > a:after,.navbar-navigation .current_page_ancestor > a:after,.navbar-navigation .current-menu-ancestor > a:after {border: 1px solid <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
-		button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a:hover,a:focus,a:active,.navbar-navigation ul ul .current_page_item > a,.navbar-navigation ul ul .current-menu-item > a,.navbar-navigation ul ul .current_page_ancestor > a,.navbar-navigation ul ul .current-menu-ancestor > a,.navbar-navigation a:hover,.main-navigation ul .current_page_item > a,
+		button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a:hover,a:focus,a:active,.navbar-navigation ul ul .current_page_item > a,.navbar-navigation a:hover,.main-navigation ul .current_page_item > a,
 		.main-navigation ul .current-menu-item > a,.main-navigation ul .current_page_ancestor > a,.main-navigation ul .current-menu-ancestor > a,.main-navigation ul .current_page_item > .expand-submenu,.main-navigation ul .current-menu-item > .expand-submenu,.main-navigation ul .current_page_ancestor > .expand-submenu,.main-navigation ul .current-menu-ancestor > .expand-submenu,.widget_nav_menu ul .current_page_item > a,.widget_nav_menu ul .current-menu-item > a,.widget_nav_menu ul .current_page_ancestor > a,.widget_nav_menu ul .current-menu-ancestor > a,.widget_nav_menu ul .current_page_item > .expand-submenu,.widget_nav_menu ul .current-menu-item > .expand-submenu,.widget_nav_menu ul .current_page_ancestor > .expand-submenu,.widget_nav_menu ul .current-menu-ancestor > .expand-submenu,.nav-links a:hover > .blogito-next-article-title,.nav-links a:hover > .blogito-previous-article-title,.nav-links a:hover > .blogito-next-article,.nav-links a:hover > .blogito-previous-article,.main-navigation .expand-submenu:hover,.widget_nav_menu .expand-submenu:hover,.main-navigation a:hover,.widget_nav_menu a:hover,.nav-social a:hover svg,.left-nav-social a:hover svg {color: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
 		.blogito-search-panel .blogito-search-panel-close:hover,
 		.menu-toggle:hover,
@@ -555,7 +555,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	$needle2 = 'page_item_has_children';
 	$haystack = $item->classes;
 	if ( in_array( $needle1, $haystack, true ) || in_array( $needle2, $haystack, true ) ) {
-		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_html__( 'Expand', 'blogito' ) . '">&#43;</span>';
+		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_attr__( 'Expand', 'blogito' ) . '">&#43;</span>';
 	}
 
 	return $item_output;
@@ -609,9 +609,9 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 				?>
 				<div class="col-xs-12 col-md-4">
 				<?php if ( has_post_thumbnail() ) : ?>
-					<a class="related-posts-thumbnail" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" style="background: url( <?php the_post_thumbnail_url( 'medium' ); ?> ) center no-repeat;background-size: cover;"></a>
+					<a class="related-posts-thumbnail" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" style="background: url( <?php the_post_thumbnail_url( 'medium' ); ?> ) center no-repeat;background-size: cover;"></a>
 				<?php endif; ?>
-				<p><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></p>
+				<p><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
 				</div>
 				<?php
 			endwhile;

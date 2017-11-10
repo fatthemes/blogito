@@ -106,10 +106,10 @@ module.exports = function (grunt) {
 	      //repeatView: true,
 	      //location: 'ec2-eu-central-1',
 	      budget: {
-		visualComplete: '10000',
-		render: '10000',
+		visualComplete: '3000',
+		render: '3000',
 		//requests: '100',
-		SpeedIndex: '10000'
+		SpeedIndex: '3000'
 	      }
             }
           }
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
 	      paths: [ '/', 'sample-page/', '?s=post', '?s=gergeafer', '2017/07/05/hello-world/', '2013/01/10/markup-image-alignment/', 'category/post-formats/', '2013/01/10/markup-image-alignment/', '2013/01/11/markup-html-tags-and-formatting/', 'tag/template/', 'segtegdfgdfg', 'author/themedemos/' ],
               locale: 'en_GB',
               strategy: 'desktop',
-              threshold: 20
+              threshold: 50
             }
           },
 	  mobile: {
@@ -136,7 +136,7 @@ module.exports = function (grunt) {
 	      paths: [ '/', 'sample-page/', '?s=post', '?s=gergeafer', '2017/07/05/hello-world/', '2013/01/10/markup-image-alignment/', 'category/post-formats/', '2013/01/10/markup-image-alignment/', '2013/01/11/markup-html-tags-and-formatting/', 'tag/template/', 'segtegdfgdfg', 'author/themedemos/' ],
               locale: 'en_GB',
               strategy: 'mobile',
-              threshold: 20
+              threshold: 50
             }
           }
         },
