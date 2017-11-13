@@ -2156,34 +2156,6 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
   .widget.widget_categories > ul > li {
     border-bottom: 1px solid #ddd;
     padding-bottom: 1rem; }
-  .widget.widget_archive > ul > li, .widget.widget_recent_entries > ul > li, .widget.widget_recent_comments > ul > li, .widget.widget_meta > ul > li {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #ddd; }
-  .widget.widget_wpcom_social_media_icons_widget > ul {
-    text-align: center; }
-    .widget.widget_wpcom_social_media_icons_widget > ul .genericon {
-      font-size: 24px;
-      margin-right: 0.8rem;
-      margin-bottom: 0.8rem; }
-  .widget.widget_authors > ul > li > ul {
-    padding-top: 1rem; }
-    .widget.widget_authors > ul > li > ul > li {
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #ddd; }
-  .widget.widget_contact_info .confit-address {
-    font-weight: 700;
-    padding-bottom: 1em; }
-  .widget.widget_contact_info .confit-email {
-    font-weight: 700;
-    padding-bottom: 1em; }
-  .widget.blog-stats > ul > li {
-    text-align: center;
-    width: 100%;
-    border: 1px solid #ccc;
-    font-size: 200%;
-    font-weight: bold;
-    line-height: 1.2;
-    padding: 0.5em; }
   .widget #wp-calendar {
     width: 100%;
     text-align: center; }
@@ -2221,7 +2193,6 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
     z-index: -1;
     display: inline-block; }
   .widget-title span, .blogito-related-posts h3 span, .comments-title span, .comment-reply-title span {
-    background-color: #fff;
     padding: 0 1rem;
     display: inline-block; }
 

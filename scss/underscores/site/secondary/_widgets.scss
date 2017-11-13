@@ -53,6 +53,80 @@
 	    padding-bottom: $grid-gutter-width/2;
         }
     }
+    
+    &.widget_archive,
+    &.widget_recent_entries,
+    &.widget_recent_comments,
+    &.widget_meta {
+	> ul {
+	    > li {
+		padding-bottom: 1rem;
+		border-bottom: 1px solid #ddd;
+	    }
+	}
+    }
+    
+    &.widget_wpcom_social_media_icons_widget {
+	> ul {
+	    text-align: center;
+	    .genericon {
+		font-size: 24px;
+		margin-right: 0.8rem;
+		margin-bottom: 0.8rem;
+	    }
+	}
+    }
+    
+    &.widget_authors {
+	> ul {
+	    > li {
+		> ul {
+		    padding-top: 1rem;
+		    > li {
+			padding-bottom: 1rem;
+			border-bottom: 1px solid #ddd;
+		    }
+		}
+	    }
+	}
+    }
+    
+    &.widget_contact_info {
+	.confit-address {
+	    font-weight: 700;
+	    padding-bottom: 1em;
+	}
+	.confit-email {
+	    font-weight: 700;
+	    padding-bottom: 1em;
+	}
+    }
+    
+    &.blog-stats {
+	> ul {
+	    > li {
+		    text-align: center;
+		    width: 100%;
+		    border: 1px solid #ccc;
+		    font-size: 200%;
+		    font-weight: bold;
+		    line-height: 1.2;
+		    padding: 0.5em;
+	    }
+	}
+    }
+    
+    #wp-calendar {
+	width: 100%;
+	text-align: center;
+	thead {
+	    tr {
+		th {
+		    text-align: center;
+		}
+	    }
+	}
+    }
 }
 
 #secondary {
@@ -111,7 +185,7 @@
     }
     span {
         @extend .small;
-        //background-color:  #faf9f8;
+        background-color: #fff;;
         //display: inline-block;
         padding: 0 $grid-gutter-width/2;
         display: inline-block;

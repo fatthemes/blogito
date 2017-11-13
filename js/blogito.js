@@ -21,10 +21,10 @@
 	    $( '.blogito-featured-slider' ).slick( {
 		//dots: true,
 		infinite: true,
-		autoplay: true,
-		autoplaySpeed: 3000,
+		autoplay: Boolean(blogito.home_page_slider_autoplay),
+		autoplaySpeed: Number(blogito.home_page_slider_play_speed),
 		speed: 1000,
-		slidesToShow: Number( blogito.home_page_slider_img_number ),
+		slidesToShow: Number(blogito.home_page_slider_img_number),
 		slidesToScroll: 1,
 		//centerMode: true,
 		//centerPadding: '50px',
