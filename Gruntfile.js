@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 	      //repeatView: true,
 	      //location: 'ec2-eu-central-1',
 	      budget: {
-		visualComplete: '3000',
+		visualComplete: '5000',
 		render: '3000',
 		//requests: '100',
 		SpeedIndex: '3000'
