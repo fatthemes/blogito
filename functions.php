@@ -198,11 +198,15 @@ function blogito_scripts() {
 	$blogito_ajax_max_pages = $wp_query->max_num_pages;
 	$blogito_ajax_paged = ( get_query_var( 'paged' ) > 1 ) ? get_query_var( 'paged' ) : 1;
 	$blogito_pagination = get_theme_mod( 'pagination', 'infinite' );
+	$blogito_home_page_slider_play_speed = get_theme_mod( 'home_page_slider_play_speed', 0 );
+	$blogito_home_page_slider_autoplay = ( 0 == $blogito_home_page_slider_play_speed ) ? false : true;
 
 	// Passing theme options to blogito.js.
 	wp_localize_script(
 		'blogito-scripts', 'blogito', array(
 			'home_page_slider_img_number' => get_theme_mod( 'home_page_slider_img_number', 2 ),
+			'home_page_slider_play_speed' => $blogito_home_page_slider_play_speed,
+			'home_page_slider_autoplay' => $blogito_home_page_slider_autoplay,
 			'loadMoreText' => esc_html__( 'Load more posts', 'blogito' ),
 			'loadingText' => esc_html__( ' ', 'blogito' ),
 			'noMorePostsText' => esc_html__( 'No More Posts', 'blogito' ),

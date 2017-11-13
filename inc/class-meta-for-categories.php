@@ -40,7 +40,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		/**
 		 * Registering meta keys.
 		 */
-		private function register_meta() {
+		public function register_meta() {
 
 			register_meta( 'term', 'bg_color', array( $this, 'sanitize_hex' ) );
 			register_meta( 'term', 'text_color', array( $this, 'sanitize_hex' ) );
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $color hex color.
 		 * @return type
 		 */
-		private function sanitize_hex( $color ) {
+		public function sanitize_hex( $color ) {
 
 			$color = ltrim( $color, '#' );
 
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $hash before hex color.
 		 * @return type
 		 */
-		private function get_term_bg_color( $term_id, $hash = false ) {
+		public function get_term_bg_color( $term_id, $hash = false ) {
 
 			$color = get_term_meta( $term_id, 'bg_color', true );
 			$color = $this->sanitize_hex( $color );
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $hash before hex color.
 		 * @return type
 		 */
-		private function get_term_text_color( $term_id, $hash = false ) {
+		public function get_term_text_color( $term_id, $hash = false ) {
 
 			$color = get_term_meta( $term_id, 'text_color', true );
 			$color = $this->sanitize_hex( $color );
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $term_id taxonomy term.
 		 * @return type
 		 */
-		private function get_term_image( $term_id ) {
+		public function get_term_image( $term_id ) {
 
 			$imageid = get_term_meta( $term_id, 'image', true );
 
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		/**
 		 * New term screen background color field.
 		 */
-		private function new_term_bg_color_field() {
+		public function new_term_bg_color_field() {
 
 			wp_nonce_field( basename( __FILE__ ), 'mfc_term_bg_color_nonce' );
 			?>
@@ -121,7 +121,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		/**
 		 * New term screen text color field.
 		 */
-		private function new_term_text_color_field() {
+		public function new_term_text_color_field() {
 
 			wp_nonce_field( basename( __FILE__ ), 'mfc_term_text_color_nonce' );
 			?>
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 *
 		 * @param type $term taxonomy term.
 		 */
-		private function edit_term_bg_color_field( $term ) {
+		public function edit_term_bg_color_field( $term ) {
 
 			$default = '#ffffff';
 			$color = $this->get_term_bg_color( $term->term_id, true );
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 *
 		 * @param type $term taxonomy term.
 		 */
-		private function edit_term_text_color_field( $term ) {
+		public function edit_term_text_color_field( $term ) {
 
 			$default = '#000000';
 			$color = $this->get_term_text_color( $term->term_id, true );
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 *
 		 * @param type $term taxonomy term.
 		 */
-		private function new_term_image_field( $term ) {
+		public function new_term_image_field( $term ) {
 
 			wp_nonce_field( basename( __FILE__ ), 'mfc_term_image_nonce' );
 			?>
@@ -212,7 +212,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 *
 		 * @param type $term taxonomy term.
 		 */
-		private function edit_term_image_field( $term ) {
+		public function edit_term_image_field( $term ) {
 
 			$default = '';
 			$imageid = $this->get_term_image( $term->term_id, true );
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $term_id taxonomy term ID.
 		 * @return type
 		 */
-		private function save_term_bg_color( $term_id ) {
+		public function save_term_bg_color( $term_id ) {
 
 			if ( ! isset( $_POST['mfc_term_bg_color_nonce'] ) || ! wp_verify_nonce( $_POST['mfc_term_bg_color_nonce'], basename( __FILE__ ) ) ) {
 				return;
@@ -281,7 +281,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $term_id taxonomy term ID.
 		 * @return type
 		 */
-		private function save_term_text_color( $term_id ) {
+		public function save_term_text_color( $term_id ) {
 
 			if ( ! isset( $_POST['mfc_term_text_color_nonce'] ) || ! wp_verify_nonce( $_POST['mfc_term_text_color_nonce'], basename( __FILE__ ) ) ) {
 				return;
@@ -303,7 +303,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $term_id taxonomy term ID.
 		 * @return type
 		 */
-		private function save_term_image( $term_id ) {
+		public function save_term_image( $term_id ) {
 
 			if ( ! isset( $_POST['mfc_term_image_nonce'] ) || ! wp_verify_nonce( $_POST['mfc_term_image_nonce'], basename( __FILE__ ) ) ) {
 				return;
@@ -325,7 +325,7 @@ if ( ! class_exists( 'Meta_For_Categories' ) ) {
 		 * @param type $hook_suffix hook suffix.
 		 * @return type
 		 */
-		private function admin_enqueue_scripts( $hook_suffix ) {
+		public function admin_enqueue_scripts( $hook_suffix ) {
 
 			if ( ( 'edit-tags.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) && ( 'term.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) ) {
 				return;
