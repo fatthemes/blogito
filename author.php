@@ -63,8 +63,8 @@ get_header();
 		<?php endif; ?>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
-		<h3><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h3>
-		<p><?php echo esc_html( get_the_author_meta( 'description' ) ); ?></p>
+		<h3><?php the_author_meta( 'display_name' ); ?></h3>
+		<p><?php the_author_meta( 'description' ); ?></p>
 		</div>
 	</div>
 	<hr>

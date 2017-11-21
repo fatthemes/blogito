@@ -1,5 +1,15 @@
 # Changes to Blogito
 
+## [1.2] - 2017-11-21
+
+### Added
+- Theme URL.
+- Jetpack in recommended plugins.
+
+### Fixed
+- Author bio html tags.
+- Header/Site branding section.
+
 ## [1.1] - 2017-11-13
 
 ### Added
