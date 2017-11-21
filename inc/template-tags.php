@@ -449,11 +449,12 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 		<style type="text/css">
 	<?php if ( 'front' === get_theme_mod( 'header_display', 'front' ) ) { ?>
 			body:not(.home) .site-content {margin-top: 6.5rem;}
-			body:not(.home) .site-branding {display:none;}
 	<?php } elseif ( '' === get_theme_mod( 'header_display', 'front' ) ) { ?>
 			.site-content {margin-top: 6.5rem;}
-			.site-branding {display:none;}
 	<?php } ?>
+	<?php if ( 'blank' !== get_header_textcolor() ) : ?>
+		.site-title a, .site-description {color: #<?php header_textcolor(); ?>;}
+	<?php endif; ?>
 		.blogito-featured-slider, .blogito-featured-slider .featured-image, .blogito-featured-slider .no-featured-image {height:<?php echo ( absint( get_theme_mod( 'home_page_slider_height', 500 ) ) * 0.6 ); ?>px;}
 		#secondary .widget:nth-of-type(3n+1), #secondary .widget:nth-of-type(3n+1) .widget-title span {background-color:<?php echo esc_attr( get_theme_mod( 'sidebar_bg_color_1', '#ffffff' ) ); ?>;}
 		#secondary .widget:nth-of-type(3n+2), #secondary .widget:nth-of-type(3n+2) .widget-title span {background-color:<?php echo esc_attr( get_theme_mod( 'sidebar_bg_color_2', '#ffffff' ) ); ?>;}
@@ -468,7 +469,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	<?php endif; ?>
 		svg:hover,a svg:hover,.blogito-author-social-icons a:hover svg {fill: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
 		button,input[type="button"],input[type="reset"],input[type="submit"],.navbar-navigation .current_page_item > a:after,.navbar-navigation .current-menu-item > a:after,.navbar-navigation .current_page_ancestor > a:after,.navbar-navigation .current-menu-ancestor > a:after {border: 1px solid <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
-		button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a:hover,a:focus,a:active,.navbar-navigation ul ul .current_page_item > a,.navbar-navigation a:hover,.main-navigation ul .current_page_item > a,
+		button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a:hover,a:focus,a:active,.navbar-navigation a:hover,.main-navigation ul .current_page_item > a,
 		.main-navigation ul .current-menu-item > a,.main-navigation ul .current_page_ancestor > a,.main-navigation ul .current-menu-ancestor > a,.main-navigation ul .current_page_item > .expand-submenu,.main-navigation ul .current-menu-item > .expand-submenu,.main-navigation ul .current_page_ancestor > .expand-submenu,.main-navigation ul .current-menu-ancestor > .expand-submenu,.widget_nav_menu ul .current_page_item > a,.widget_nav_menu ul .current-menu-item > a,.widget_nav_menu ul .current_page_ancestor > a,.widget_nav_menu ul .current-menu-ancestor > a,.widget_nav_menu ul .current_page_item > .expand-submenu,.widget_nav_menu ul .current-menu-item > .expand-submenu,.widget_nav_menu ul .current_page_ancestor > .expand-submenu,.widget_nav_menu ul .current-menu-ancestor > .expand-submenu,.nav-links a:hover > .blogito-next-article-title,.nav-links a:hover > .blogito-previous-article-title,.nav-links a:hover > .blogito-next-article,.nav-links a:hover > .blogito-previous-article,.main-navigation .expand-submenu:hover,.widget_nav_menu .expand-submenu:hover,.main-navigation a:hover,.widget_nav_menu a:hover,.nav-social a:hover svg,.left-nav-social a:hover svg {color: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
 		.blogito-search-panel .blogito-search-panel-close:hover,
 		.menu-toggle:hover,
@@ -653,3 +654,54 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	}
 
 	add_action( 'init', 'blogito_jetpack_sharing_remove_filters' );
+
+	/**
+	 * Site branding header section.
+	 */
+	function blogito_the_site_branding() {
+	$output = '';
+	if ( 'always' === get_theme_mod( 'header_display', 'front' ) ) {
+		if ( is_front_page() && is_home() ) {
+			$output .= '<div class="site-branding">';
+			$output .= '<h1 class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" rel="home">';
+			if ( get_header_image() ) {
+				$output .= '<img src="' . get_header_image() . '" alt="' . get_bloginfo( 'name' ) . '" >';
+				} elseif ( 'blank' !== get_header_textcolor() ) {
+				$output .= get_bloginfo( 'name' );
+				}
+			$output .= '</a></h1>';
+			if ( ! get_header_image() && 'blank' !== get_header_textcolor() ) {
+				$output .= '<p class="site-description">' . get_bloginfo( 'description' ) . '</p>';
+				}
+			$output .= '</div><!-- .site-branding -->';
+			} else {
+			$output = '<div class="site-branding">';
+			$output .= '<p class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" rel="home">';
+			if ( get_header_image() ) {
+				$output .= '<img src="' . get_header_image() . '" alt="' . get_bloginfo( 'name' ) . '" >';
+				} elseif ( 'blank' !== get_header_textcolor() ) {
+				$output .= get_bloginfo( 'name' );
+				}
+			$output .= '</a></p>';
+			if ( ! get_header_image() && 'blank' !== get_header_textcolor() ) {
+				$output .= '<p class="site-description">' . get_bloginfo( 'description' ) . '</p>';
+				}
+			$output .= '</div><!-- .site-branding -->';
+			}
+	} elseif ( 'front' === get_theme_mod( 'header_display', 'front' ) && is_front_page() && is_home() ) {
+		$output .= '<div class="site-branding">';
+		$output .= '<h1 class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" rel="home">';
+		if ( get_header_image() ) {
+			$output .= '<img src="' . get_header_image() . '" alt="' . get_bloginfo( 'name' ) . '" >';
+			} elseif ( 'blank' !== get_header_textcolor() ) {
+			$output .= get_bloginfo( 'name' );
+			}
+		$output .= '</a></h1>';
+		if ( ! get_header_image() && 'blank' !== get_header_textcolor() ) {
+			$output .= '<p class="site-description">' . get_bloginfo( 'description' ) . '</p>';
+			}
+		$output .= '</div><!-- .site-branding -->';
+		}
+	echo $output; // WPCS: XSS OK.
+	}
+

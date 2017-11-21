@@ -46,6 +46,13 @@ function blogito_register_required_plugins() {
 			'slug' => 'user-social-profiles',
 			'required' => false,
 		),
+
+		// Jetpack by WordPress.com from WordPress Plugin Repository.
+		array(
+			'name'      => 'Jetpack by WordPress.com',
+			'slug'      => 'jetpack',
+			'required'  => false,
+		),
 	);
 
 	/**

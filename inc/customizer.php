@@ -115,7 +115,7 @@ function blogito_customize_register( $wp_customize ) {
 		'header_display', array(
 			'label' => esc_html__( 'Display Header', 'blogito' ),
 			'section' => 'static_front_page',
-			'priority' => 100,
+			'priority' => 10,
 			'type' => 'select',
 			'choices' => array(
 				'front' => esc_html__( 'On Front Page', 'blogito' ),
@@ -125,15 +125,7 @@ function blogito_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Section Blog Home Page.
-	$wp_customize->add_section(
-		'home_page', array(
-			'title' => esc_html__( 'Home Page', 'blogito' ),
-			'priority' => 1000,
-			'description' => esc_html__( 'Blog Home Page Settings', 'blogito' ),
-		)
-	);
-
+	// Section Homepage Settings.
 	$wp_customize->add_setting(
 		'home_page_layout', array(
 			'default' => 'classic',
@@ -144,7 +136,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_layout', array(
 			'label' => esc_html__( 'Blog Home Page Layout', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'select',
 			'choices' => array(
 				'masonry' => esc_html__( 'Masonry + Sidebar', 'blogito' ),
@@ -165,7 +157,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_slider_img_number', array(
 			'label' => esc_html__( 'Number of Images to Show in Slider', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'number',
 			'input_attrs' => array(
 				'min' => 1,
@@ -185,7 +177,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_slider_height', array(
 			'label' => esc_html__( 'Height of Home Page Slider', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'description' => esc_html__( '(in pixels)', 'blogito' ),
 			'type' => 'number',
 			'input_attrs' => array(
@@ -206,7 +198,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_slider_img_size', array(
 			'label' => esc_html__( 'Slider Image Size', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'description' => esc_html__( 'From >Settings>Media', 'blogito' ),
 			'type' => 'select',
 			'choices' => array(
@@ -228,7 +220,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		 'home_page_slider_play_speed', array(
 			 'label'   => esc_html__( 'Sliding speed of Home Page Slider (in ms)', 'blogito' ),
-			 'section' => 'home_page',
+			 'section' => 'static_front_page',
 			 'description'    => esc_html__( '0 to disable autoplay', 'blogito' ),
 			 'type'    => 'number',
 			 'input_attrs' => array(
@@ -249,7 +241,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_latest_posts_text', array(
 			'label' => esc_html__( 'Enable Latest Posts Text', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -264,7 +256,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'home_page_display_content', array(
 			'label' => esc_html__( 'Display Content on Home and Archive Pages.', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -279,7 +271,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'hide_title_on_home_archive', array(
 			'label' => esc_html__( 'Hide Titles On Home Page/Archive Pages', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -294,7 +286,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'hide_meta_on_home_archive', array(
 			'label' => esc_html__( 'Hide Meta On Home Page/Archive Pages', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -309,7 +301,7 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'pagination', array(
 			'label' => esc_html__( 'Pagination Style', 'blogito' ),
-			'section' => 'home_page',
+			'section' => 'static_front_page',
 			'type' => 'select',
 			'choices' => array(
 				'ajax' => esc_html__( 'Load More Button', 'blogito' ),

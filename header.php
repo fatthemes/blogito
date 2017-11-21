@@ -64,33 +64,7 @@
 			?>
 		</nav><!-- #site-navigation -->
 
-		<div class="site-branding">
-			<?php if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-				<?php if ( get_header_image() ) : ?>
-					<img src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" >
-					<?php
-				else :
-					bloginfo( 'name' );
-				endif;
-				?>
-				</a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-				<?php if ( get_header_image() ) : ?>
-					<img src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" >
-					<?php
-				else :
-					bloginfo( 'name' );
-				endif;
-				?>
-				</a></p>
-			<?php endif; ?>
-			<?php
-			if ( ! get_header_image() ) :
-			?>
-				<p class="site-description"><?php bloginfo( 'description' ); ?></p><?php endif; ?>
-		</div><!-- .site-branding -->
+		<?php blogito_the_site_branding(); ?>
 
 		</header><!-- #masthead -->
 
