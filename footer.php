@@ -62,7 +62,12 @@
 	if ( has_custom_logo() ) {
 		the_custom_logo();
 	}
-	echo wp_kses_post( get_theme_mod( 'footer_text', '<p>&copy; ' . date_i18n( __( 'Y', 'blogito' ) ) . ' ' . get_bloginfo( 'name' ) . '</p>' ) );
+	$blogito_dafault_footer_text = '<p>&copy; ' . date_i18n( __( 'Y', 'blogito' ) ) . ' ' . get_bloginfo( 'name' ) . '</p><p><a href="https://wordpress.org/">' .
+		// translators: WordPress.
+		sprintf( esc_html__( 'Proudly powered by %s', 'blogito' ), 'WordPress' ) . '</a><span class="sep"> | </span>' .
+		// translators: theme name and theme author.
+		sprintf( esc_html__( 'Theme: %1$s by %2$s.', 'blogito' ), 'Blogito', '<a href="https://fatthemes.com/" rel="designer">Fat Themes</a>' ) . '</p>';
+	echo wp_kses_post( get_theme_mod( 'footer_text', $blogito_dafault_footer_text ) );
 	?>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->

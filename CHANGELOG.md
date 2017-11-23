@@ -1,5 +1,12 @@
 # Changes to Blogito
 
+## [1.2.1] - 2017-11-23
+
+### Added
+- Credits in footer.
+### Removed
+- Unneeded css files.
+
 ## [1.2] - 2017-11-21
 
 ### Added
