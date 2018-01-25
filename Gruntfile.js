@@ -101,7 +101,7 @@ module.exports = function (grunt) {
           default: {
             options: {
               url: 'http://THEME_SLUG.dev.limestreet.pl/',
-              key: 'A.eac3cfd59f876326152463fcacabf220',
+              key: 'WEBPAGETEST_API_KEY',
 	      timeout: '600',
 	      //repeatView: true,
 	      //location: 'ec2-eu-central-1',
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
         pagespeed: {
           options: {
             //nokey: true,
-	    key: 'AIzaSyBnA8a5PGowgM6PqFVBUHyEKNrLtnEuJBA',
+	    key: 'PAGESPEED_API_KEY',
             url: 'http://THEME_SLUG.dev.limestreet.pl/'
           },
           desktop: {
@@ -139,7 +139,7 @@ module.exports = function (grunt) {
               threshold: 50
             }
           }
-        },
+        }
 	
 /*	uncss: {
 	    dist: {
@@ -186,8 +186,8 @@ module.exports = function (grunt) {
     //grunt.loadNpmTasks( 'grunt-rtlcss' );
     grunt.loadNpmTasks( 'grunt-perfbudget' );
     grunt.loadNpmTasks( 'grunt-pagespeed' );
-    grunt.loadNpmTasks( 'grunt-sass' );
-    grunt.loadNpmTasks( 'grunt-contrib-watch' );
+    //grunt.loadNpmTasks( 'grunt-sass' );
+    //grunt.loadNpmTasks( 'grunt-contrib-watch' );
     //grunt.loadNpmTasks( 'grunt-uncss' );
     //grunt.registerTask('default', [ 'watch']);
     grunt.registerTask('default', [ 'addtextdomain', 'makepot', 'postcss', 'wpcss']);
