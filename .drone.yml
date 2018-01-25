@@ -19,7 +19,6 @@ pipeline:
       - STYLECSS_VERSION_LINE=$(grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" $PWD/style.css)
       - STYLECSS_VERSION=$(echo $STYLECSS_VERSION_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
       - grep -q "\[$STYLECSS_VERSION\]" $PWD/CHANGELOG.md
-      - if [ ! grep -q "\[$STYLECSS_VERSION\]" $PWD/CHANGELOG.md ]; then echo "There is no current theme version in changelog.md" && exit 1 ;fi
       - git clone -b "2.9" --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR
       - git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $SNIFFS_DIR
       - git clone -b 7.1.5 --depth 1 https://github.com/wimg/PHPCompatibility.git $SNIFFS_DIR/PHPCompatibility
