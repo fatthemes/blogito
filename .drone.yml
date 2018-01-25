@@ -1,11 +1,21 @@
 pipeline:
+  database:
+    image: mariadb
+    detach: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_USER=wp
+      - MYSQL_PASSWORD=wp
+      - MYSQL_DATABASE=wordpress_test
+    when:
+      event: push
+
   codetest:
     image: limestreet/php-cli
     environment:
       - PHPCS_DIR=/tmp/phpcs
       - SNIFFS_DIR=/tmp/sniffs
     commands:
-      - echo "codetest"
       - git clone -b "2.9" --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR
       - git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $SNIFFS_DIR
       - git clone -b 7.1.5 --depth 1 https://github.com/wimg/PHPCompatibility.git $SNIFFS_DIR/PHPCompatibility
@@ -18,8 +28,6 @@ pipeline:
       - find -L . -name '*.php' -not -path "*node_modules*" -not -path "*vendor*" -not -path "*php-codesniffer*" -not -path ".*" -print0 | xargs -0 -n 1 -P 4 /opt/source/php-5.2.17/bin/php -l
     when:
       event: push
-      #branch:
-      #  exclude: dev
 
   wptest:
     image: limestreet/apache-php-7
@@ -27,7 +35,7 @@ pipeline:
       - WP_VERSION=master
       - WP_DEVELOP_DIR=/tmp/wp
     commands:
-      - echo "wptest"
+      #- echo "wptest"
       - php -v
       - find -L . -name '*.php' -not -path "*node_modules*" -not -path "*vendor*" -not -path "*php-codesniffer*" -not -path ".*" -print0 | xargs -0 -n 1 -P 4 php -l
       - THEME_SLUG=$(basename $(pwd))
@@ -53,12 +61,9 @@ pipeline:
       - phpunit --group themes
     when:
       event: push
-      #branch:
-      #  exclude: dev
 
   push_to_dev:
     image: limestreet/apache-php-7
-    environment:
     commands:
       #- $DRONE_TAG
       - git config --global user.email "$DOCKER_EMAIL"
@@ -85,62 +90,88 @@ pipeline:
       - git checkout -b dev
       - git merge master
       - git push origin dev --force
-    #- git push origin/beta
     secrets: [ DOCKER_EMAIL ]
     when:
       event: push
-      #branch:
-      #  exclude: dev
 
   performancetest:
     image: limestreet/apache-php-7
-    environment:
     commands:
-    #- ls -la
-    #- printenv
-    - THEME_SLUG=$DRONE_REPO_NAME
-    - THEME_LOW=`echo "$THEME_SLUG" | sed 's/-by-fat//'`
-    #- echo $THEME_LOW
-    #- echo $PWD
-    #- THEME_NAME=`echo "$THEME_LOW" | sed 's/\b\w/\U&/'`
-    #- npm install --silent
-    - sleep 15
-    - REMOTEURL="http://$THEME_LOW.dev.limestreet.pl/wp-content/themes/$THEME_LOW/style.css"
-    #- echo $REMOTEURL
-    - REMOTEVERSION=$(curl $REMOTEURL | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
-    - echo $REMOTEVERSION
-    - LOCALVERSION=$(cat style.css | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
-    - echo $LOCALVERSION
-    - if [ $REMOTEVERSION != $LOCALVERSION ]; then echo "Wrong theme version - $REMOTEVERSION instead of $LOCALVERSION" && exit 1 ;fi
-    - sed -i "s/THEME_SLUG/$THEME_SLUG/g" ./Gruntfile.js
-#    - pa11y --ignore "warning;notice" http://$THEME_SLUG.dev.fatthemes.com/
-#    - pa11y --ignore "warning;notice" http://$THEME_SLUG.dev.fatthemes.com/sample-page/
-    #- pa11y --ignore "warning;notice" http://$THEME_SLUG.dev.fatthemes.com/cart/
-    #- pa11y --ignore "warning;notice" http://$THEME_SLUG.dev.fatthemes.com/product-category/summer-2016/
-    #- pa11y --ignore "warning;notice" http://$THEME_SLUG.dev.fatthemes.com/product/black-concrete-planter-for-succulents/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/?s=post
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/?s=gergeafer
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/the-padded-seat-means-you-sit-comfortably/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/category/design/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/audio-post-abstrait/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/how-to-design-more-with-less/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/video-post-to-bring-you-joy/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/author/martha-inez/
-    #- pa11y --ignore "warning;notice" http://beta.$THEME_LOW.fatthemes.com/blog/tag/wordpress/
-    - grunt pagespeed
-    - grunt perfbudget
+      #- ls -la
+      #- printenv
+      - THEME_SLUG=$DRONE_REPO_NAME
+      - THEME_LOW=`echo "$THEME_SLUG" | sed 's/-by-fat//'`
+      #- echo $THEME_LOW
+      #- echo $PWD
+      #- THEME_NAME=`echo "$THEME_LOW" | sed 's/\b\w/\U&/'`
+      #- npm install --silent
+      - sleep 15
+      - REMOTEURL="http://$THEME_LOW.dev.limestreet.pl/wp-content/themes/$THEME_SLUG/style.css"
+      #- echo $REMOTEURL
+      - REMOTEVERSION=$(curl $REMOTEURL | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
+      - echo $REMOTEVERSION
+      - LOCALVERSION=$(cat style.css | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?.*)")
+      - echo $LOCALVERSION
+      - if [ $REMOTEVERSION != $LOCALVERSION ]; then echo "Wrong theme version - $REMOTEVERSION instead of $LOCALVERSION" && exit 1 ;fi
+      - sed -i "s/THEME_SLUG/$THEME_SLUG/g" ./Gruntfile.js
+      - sed -i "s/WEBPAGETEST_API_KEY/$WEBPAGETEST_API_KEY/g" ./Gruntfile.js
+      - sed -i "s/PAGESPEED_API_KEY/$PAGESPEED_API_KEY/g" ./Gruntfile.js
+      #- pa11y -V
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/sample-page/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/?s=post
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/?s=gergeafer
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/gergeafer
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/2013/01/10/markup-image-alignment/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/2013/01/11/markup-html-tags-and-formatting/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/category/aciform/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/2012/01/03/template-comments/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/author/patryk/
+      #- pa11y --ignore "warning;notice" http://$THEME_LOW.dev.limestreet.pl/tag/template/
+      - grunt pagespeed
+      - grunt perfbudget
+    secrets: [ WEBPAGETEST_API_KEY, PAGESPEED_API_KEY ]
     when:
       event: push
+
+  version_check_and_build:
+    image: limestreet/apache-php-7
+    commands:
+      - THEME_SLUG=$DRONE_REPO_NAME
+      - THEMEVERSION=$(cat style.css | grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?)")
+      - REPOTAG=`echo "${DRONE_TAG}" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?)")`
+      - echo $REPOTAG
+      - if [ $REPOTAG != $THEMEVERSION ]; then echo "Wrong theme/tag version - version from repo tag is $REPOTAG (${DRONE_TAG}) but theme version from style.css is $THEMEVERSION" && exit 1 ;fi
+      - apt-get update && apt-get install -y zip
+      - npm install --silent
+      - grunt
+      - rm -rf *.yml .drone.yml .g* .j* .n* scss node_modules vendor tests Gruntfile.js casper-tests.js package.json *.ruleset.xml nbproject *.rb *.tmp *.map *.log Dockerfile
+      - cd ..
+      - zip -FSr $THEME_SLUG.zip $THEME_SLUG
+      - mkdir -p $DRONE_REPO_NAME/dist
+      - cp $THEME_SLUG.zip $DRONE_REPO_NAME/dist/$THEME_SLUG.zip
+    when:
+      event: tag
+
+  github_release:
+    image: plugins/github-release
+    secrets: [ github_token ]
+    files: dist/*
+    prerelease: true
+    when:
+      event: tag
       #branch:
-      #  exclude: dev
-      
-services:
-  database:
-    image: mysql:5.6
-    environment:
-      - MYSQL_ROOT_PASSWORD=pass
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER=wp
-      - MYSQL_PASSWORD=wp
-      - MYSQL_DATABASE=wordpress_test
+      #  - exclude: [master]
+
+#  trigger_fatthemes_build:
+#    image: plugins/downstream
+#    server: https://drone.limestreet.pl
+#    token: [ fatthemes_token ]
+#    fork: true
+#    repositories:
+#      - fatthemes/fatthemes.com
+#    when:
+#      event: tag
+
+branches:
+  exclude: [master]
