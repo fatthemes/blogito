@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.2.2] - 2018-01-25
+
+### Added
+- Recommended Instagram plugin.
+
 ## [1.2.1] - 2017-11-23
 
 ### Added
