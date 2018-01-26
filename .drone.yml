@@ -16,9 +16,6 @@ pipeline:
       - PHPCS_DIR=/tmp/phpcs
       - SNIFFS_DIR=/tmp/sniffs
     commands:
-      - STYLECSS_VERSION_LINE=$(grep -Po "Version:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" $PWD/style.css)
-      - STYLECSS_VERSION=$(echo $STYLECSS_VERSION_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
-      - grep -q "\[$STYLECSS_VERSION\]" $PWD/CHANGELOG.md
       - git clone -b "2.9" --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR
       - git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $SNIFFS_DIR
       - git clone -b 7.1.5 --depth 1 https://github.com/wimg/PHPCompatibility.git $SNIFFS_DIR/PHPCompatibility
@@ -145,6 +142,7 @@ pipeline:
       - REPOTAG=`echo "${DRONE_TAG}" | grep -Po "(\d\d?\.\d\d?\.?\d?\d?)")`
       - echo $REPOTAG
       - if [ $REPOTAG != $THEMEVERSION ]; then echo "Wrong theme/tag version - version from repo tag is $REPOTAG (${DRONE_TAG}) but theme version from style.css is $THEMEVERSION" && exit 1 ;fi
+      - grep -q "\[$THEMEVERSION\]" $PWD/CHANGELOG.md
       - apt-get update && apt-get install -y zip
       - npm install --silent
       - grunt
