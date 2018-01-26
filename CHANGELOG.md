@@ -1,9 +1,10 @@
 # Changes to Blogito
 
-## [1.2.2] - 2018-01-25
+## [1.3] - 2018-01-26
 
 ### Added
 - Recommended Instagram plugin.
+- Styling for TOP POSTS & PAGES Jetpack widget
 
 ## [1.2.1] - 2017-11-23
 
