@@ -273,28 +273,16 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 
 		// Loop the array of popular posts objects.
 		foreach ( $mostpopular as $popular ) {
+			$post_cat = get_the_category_list( __( '<span>&#124;</span>', 'blogito' ), '', $popular->id );
+			$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
 
-		// $post_cat = get_the_category_list( esc_html__( '<span> &#124; </span>', 'blogito' ), '', $popular->id );
-		$post_cat = wp_kses(
-			get_the_category_list( __( '<span>&#124;</span>', 'blogito' ), '', $popular->id ), array(
-				'a' => array(
-					'href' => array(),
-				),
-				'span' => '',
-			)
-		);
-
-		$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
-
-		$output .= '<li>';
-		$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
-		$output .= blogito_post_format_icon( $popular->id );
-		$output .= ( ! empty( $post_cat ) ) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
-		$output .= ( ! empty( $thumb ) ) ? '</div>' : '';
-		$output .= '<h2 class="entry-title"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $popular->title . '</a></h2>';
-		// $output .= ( ! empty ($stats)) ? $stats : "";
-		// $output .= $excerpt;
-		$output .= '</li>';
+			$output .= '<li>';
+			$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
+			$output .= blogito_post_format_icon( $popular->id );
+			$output .= ( ! empty( $post_cat ) ) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
+			$output .= ( ! empty( $thumb ) ) ? '</div>' : '';
+			$output .= '<h2 class="entry-title"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $popular->title . '</a></h2>';
+			$output .= '</li>';
 		}
 
 		$output .= '</ul>';
