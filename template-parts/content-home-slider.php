@@ -33,16 +33,7 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 				<div class="blogito-featured-slider-title-wrapper">
 					<div class="blogito-featured-slider-title">
 					<span class="featured-category">
-						<?php
-						echo wp_kses(
-							get_the_category_list( __( '<span> &#124; </span>', 'blogito' ) ), array(
-								'a' => array(
-									'href' => array(),
-								),
-								'span' => '',
-							)
-						);
-						?>
+						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>
 					<h2 class="blogito-featured-slider-header"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo get_the_title(); ?></a></h2>
 					</div>
@@ -52,16 +43,7 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 				<div class="no-featured-image">
 					<div class="blogito-featured-slider-title">
 					<span class="featured-category">
-						<?php
-						echo wp_kses(
-							get_the_category_list( __( '<span> &#124; </span>', 'blogito' ) ), array(
-								'a' => array(
-									'href' => array(),
-								),
-								'span' => '',
-							)
-						);
-						?>
+						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>
 					<h2 class="blogito-featured-slider-header"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo get_the_title(); ?></a></h2>
 					</div>

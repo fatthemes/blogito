@@ -17,13 +17,7 @@
 	if ( is_attachment() ) :
 		echo esc_html__( 'Attachment page', 'blogito' );
 	else :
-		echo wp_kses(
-			get_the_category_list( ' &#124; ' ), array(
-				'a' => array(
-					'href' => array(),
-				),
-			)
-		);
+		the_category( __( '<span> &#124; </span>', 'blogito' ) );
 	endif;
 	?>
 	</div>
