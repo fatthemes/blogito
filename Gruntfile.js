@@ -105,11 +105,13 @@ module.exports = function (grunt) {
 	      timeout: '600',
 	      //repeatView: true,
 	      //location: 'ec2-eu-central-1',
+	      location: 'Dulles_MotoG',
+	      connectivity: '3G',
 	      budget: {
-		visualComplete: '5000',
-		render: '3000',
+		visualComplete: '6000',
+		render: '4000',
 		//requests: '100',
-		SpeedIndex: '3000'
+		SpeedIndex: '5000'
 	      }
             }
           }
