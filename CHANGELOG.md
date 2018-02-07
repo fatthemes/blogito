@@ -1,5 +1,9 @@
 # Changes to Blogito
 
+## [1.3.2] - 2018-02-07
+
+### Changed: tested up to 4.9.4 (WP version)
+
 ## [1.3.1] - 2018-02-06
 
 ### Fixed: PHP 7.2 compatibility.
