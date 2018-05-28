@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.3.3] - 2018-05-28
+
+### Changed
+- Compatibility with gdpr plugin improved
+
 ## [1.3.2] - 2018-02-07
 
 ### Changed: tested up to 4.9.4 (WP version)
