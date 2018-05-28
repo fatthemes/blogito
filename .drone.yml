@@ -58,8 +58,8 @@ pipeline:
       - THEME_DIR=$WP_DEVELOP_DIR/src/wp-content/themes
       - cd ..
       - cp -r $THEME_SLUG $THEME_DIR
-      - cd $WP_DEVELOP_DIR
-      - ls -la $WP_DEVELOP_DIR/src
+      - cd $WP_DEVELOP_DIR/src
+      - ls -la $WP_DEVELOP_DIR
       - ls -la
       - cp wp-tests-config-sample.php wp-tests-config.php
       - sed -i "s/localhost/database:3306/" wp-tests-config.php
