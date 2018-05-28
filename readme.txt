@@ -1,7 +1,7 @@
 === Blogito ===
 
 Requires at least: 4.5
-Tested up to: 4.9.4
+Tested up to: 4.9.6
 
 == Installation ==
 
