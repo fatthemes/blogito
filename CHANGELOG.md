@@ -7,11 +7,13 @@
 
 ## [1.3.2] - 2018-02-07
 
-### Changed: tested up to 4.9.4 (WP version)
+### Changed
+- tested up to 4.9.4 (WP version)
 
 ## [1.3.1] - 2018-02-06
 
-### Fixed: PHP 7.2 compatibility.
+### Fixed
+- PHP 7.2 compatibility.
 
 ## [1.3] - 2018-01-26
 

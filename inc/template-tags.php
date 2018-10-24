@@ -19,15 +19,19 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 	if ( is_single() ) {
 
 			$time_string = sprintf(
-			$time_string, esc_attr( get_the_date( 'c' ) ), human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
+			$time_string,
+				esc_attr( get_the_date( 'c' ) ),
+				human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
 				);
 
 				$posted_on = sprintf( /* translators: link to post date */
-				esc_html_x( '%s ago', 'post date', 'blogito' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+				esc_html_x( '%s ago', 'post date', 'blogito' ),
+					'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 				);
 
 				$byline = sprintf( /* translators: link to author page */
-				esc_html_x( ' by %s', 'post author', 'blogito' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+				esc_html_x( ' by %s', 'post author', 'blogito' ),
+					'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 				);
 
 				echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
@@ -35,9 +39,7 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 
 			$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_attr( get_the_date() ) );
 
-			$posted_on = sprintf( /* translators: link to post date */
-			esc_html_x( '%s ', 'post date', 'blogito' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-			);
+			$posted_on = '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
 
 			echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
 	}
@@ -164,7 +166,8 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 				<?php
 				comment_reply_link(
 					array_merge(
-						$args, array(
+						$args,
+						array(
 							'depth' => $depth,
 							'max_depth' => $args['max_depth'],
 							'reply_text' => 'REPLY',
@@ -567,7 +570,8 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 		$terms = wp_get_post_categories( get_the_ID() );
 		} else {
 		$terms = wp_get_post_tags(
-			get_the_ID(), array(
+			get_the_ID(),
+			array(
 				'fields' => 'ids',
 			)
 		);
