@@ -258,7 +258,7 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Some meta fields for category styling.
  */
-require get_template_directory() . '/inc/class-meta-for-categories.php';
+require get_template_directory() . '/inc/class-blogito-meta-for-categories.php';
 
 /**
  * Load TGMPA recommended plugins.
