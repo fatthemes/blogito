@@ -57,7 +57,8 @@ if ( ! function_exists( 'blogito_setup' ) ) :
 	 * to output valid HTML5.
 	 */
 	add_theme_support(
-		'html5', array(
+		'html5',
+		array(
 			'gallery',
 			'caption',
 		)
@@ -68,7 +69,8 @@ if ( ! function_exists( 'blogito_setup' ) ) :
 	 * See https://developer.wordpress.org/themes/functionality/post-formats/
 	 */
 	add_theme_support(
-		'post-formats', array(
+		'post-formats',
+		array(
 			'audio',
 			'video',
 			'gallery',
@@ -172,7 +174,8 @@ add_action( 'widgets_init', 'blogito_widgets_init' );
  */
 function blogito_scripts() {
 
-	wp_enqueue_style( 'blogito-style', get_stylesheet_uri() );
+	$blogito_theme_info = wp_get_theme();
+	wp_enqueue_style( 'blogito-style', get_stylesheet_uri(), array(), $blogito_theme_info->get( 'Version' ) );
 
 	wp_enqueue_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
 
@@ -203,12 +206,14 @@ function blogito_scripts() {
 
 	// Passing theme options to blogito.js.
 	wp_localize_script(
-		'blogito-scripts', 'blogito', array(
+		'blogito-scripts',
+		'blogito',
+		array(
 			'home_page_slider_img_number' => get_theme_mod( 'home_page_slider_img_number', 2 ),
 			'home_page_slider_play_speed' => $blogito_home_page_slider_play_speed,
 			'home_page_slider_autoplay' => $blogito_home_page_slider_autoplay,
 			'loadMoreText' => esc_html__( 'Load more posts', 'blogito' ),
-			'loadingText' => esc_html__( ' ', 'blogito' ),
+			'loadingText' => '',
 			'noMorePostsText' => esc_html__( 'No More Posts', 'blogito' ),
 			'expandText' => esc_html__( 'Expand', 'blogito' ),
 			'closeText' => esc_html__( 'Close', 'blogito' ),
@@ -253,7 +258,7 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Some meta fields for category styling.
  */
-require get_template_directory() . '/inc/class-meta-for-categories.php';
+require get_template_directory() . '/inc/class-blogito-meta-for-categories.php';
 
 /**
  * Load TGMPA recommended plugins.

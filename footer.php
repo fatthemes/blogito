@@ -66,7 +66,7 @@
 		// translators: WordPress.
 		sprintf( esc_html__( 'Proudly powered by %s', 'blogito' ), 'WordPress' ) . '</a><span class="sep"> | </span>' .
 		// translators: theme name and theme author.
-		sprintf( esc_html__( 'Theme: %1$s by %2$s.', 'blogito' ), 'Blogito', '<a href="https://fatthemes.com/" rel="designer">Fat Themes</a>' ) . '</p>';
+		sprintf( esc_html__( 'Theme: %1$s by %2$s.', 'blogito' ), 'Blogito', '<a href="https://blogonyourown.com/" rel="designer">BlogOnYourOwn.com</a>' ) . '</p>';
 	echo wp_kses_post( get_theme_mod( 'footer_text', $blogito_dafault_footer_text ) );
 	?>
 	</div><!-- .site-info -->
