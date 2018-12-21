@@ -304,20 +304,19 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	 * @since blogito 1.0
 	 */
 	function blogito_content() {
-
 		$format = get_post_format();
 
 		if ( 'audio' === $format ) {
-		return blogito_media_content();
+			return blogito_media_content();
 		} elseif ( 'video' === $format ) {
-		return blogito_media_content();
+			return blogito_media_content();
 		} elseif ( 'gallery' === $format ) {
-		return blogito_gallery_content();
+			return blogito_gallery_content();
+		} elseif ( 'excerpt' === get_theme_mod( 'show_content_or_excerpt', 'content' ) ) {
+			the_excerpt();
 		} else {
-		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
-		$content = apply_filters( 'the_content', $content );
-		$content = str_replace( ']]>', ']]&gt;', $content );
-		echo $content; // WPCS: XSS OK.
+			// Translators: page/post title.
+			the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) )  );
 		}
 	}
 
@@ -697,3 +696,15 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	echo $output; // WPCS: XSS OK.
 	}
 
+	if ( ! function_exists( 'blogito_excerpt_length' ) ) :
+
+	add_filter( 'excerpt_length', 'blogito_excerpt_length', 100 );
+	/**
+	 * Custom excerpt length
+	 *
+	 * @return int
+	 */
+	function blogito_excerpt_length() {
+		return get_theme_mod( 'excerpt_length', 55 );
+		}
+	endif;

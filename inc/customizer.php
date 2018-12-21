@@ -142,7 +142,16 @@ function blogito_customize_register( $wp_customize ) {
 		)
 	);
 
-	// Section Homepage Settings.
+	// Section Blog Home Page.
+	$wp_customize->add_section(
+		'home_page',
+		array(
+			'title' => esc_html__( 'Blog Pages', 'blogito' ),
+			'priority' => 1000,
+			'description' => esc_html__( 'Blog Home Page Settings', 'blogito' ),
+		)
+	);
+	
 	$wp_customize->add_setting(
 		'home_page_layout',
 		array(
@@ -155,7 +164,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_layout',
 		array(
 			'label' => esc_html__( 'Blog Home Page Layout', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'select',
 			'choices' => array(
 				'masonry' => esc_html__( 'Masonry + Sidebar', 'blogito' ),
@@ -178,7 +187,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_slider_img_number',
 		array(
 			'label' => esc_html__( 'Number of Images to Show in Slider', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'number',
 			'input_attrs' => array(
 				'min' => 1,
@@ -200,7 +209,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_slider_height',
 		array(
 			'label' => esc_html__( 'Height of Home Page Slider', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'description' => esc_html__( '(in pixels)', 'blogito' ),
 			'type' => 'number',
 			'input_attrs' => array(
@@ -223,7 +232,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_slider_img_size',
 		array(
 			'label' => esc_html__( 'Slider Image Size', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'description' => esc_html__( 'From >Settings>Media', 'blogito' ),
 			'type' => 'select',
 			'choices' => array(
@@ -247,7 +256,7 @@ function blogito_customize_register( $wp_customize ) {
 		 'home_page_slider_play_speed',
 		array(
 			'label'   => esc_html__( 'Sliding speed of Home Page Slider (in ms)', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'description'    => esc_html__( '0 to disable autoplay', 'blogito' ),
 			'type'    => 'number',
 			'input_attrs' => array(
@@ -270,7 +279,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_latest_posts_text',
 		array(
 			'label' => esc_html__( 'Enable Latest Posts Text', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -287,7 +296,7 @@ function blogito_customize_register( $wp_customize ) {
 		'home_page_display_content',
 		array(
 			'label' => esc_html__( 'Display Content on Home and Archive Pages.', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -304,7 +313,7 @@ function blogito_customize_register( $wp_customize ) {
 		'hide_title_on_home_archive',
 		array(
 			'label' => esc_html__( 'Hide Titles On Home Page/Archive Pages', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -321,7 +330,7 @@ function blogito_customize_register( $wp_customize ) {
 		'hide_meta_on_home_archive',
 		array(
 			'label' => esc_html__( 'Hide Meta On Home Page/Archive Pages', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'checkbox',
 		)
 	);
@@ -338,12 +347,56 @@ function blogito_customize_register( $wp_customize ) {
 		'pagination',
 		array(
 			'label' => esc_html__( 'Pagination Style', 'blogito' ),
-			'section' => 'static_front_page',
+			'section' => 'home_page',
 			'type' => 'select',
 			'choices' => array(
 				'ajax' => esc_html__( 'Load More Button', 'blogito' ),
 				'infinite' => esc_html__( 'Infinite Scrolling', 'blogito' ),
 				'' => esc_html__( 'Page Numbers', 'blogito' ),
+			),
+		)
+	);
+	
+	$wp_customize->add_setting(
+		'show_content_or_excerpt',
+		array(
+			'default' => 'content',
+			'sanitize_callback' => 'blogito_sanitize_select_show_content_or_excerpt',
+		)
+	);
+
+	$wp_customize->add_control(
+		'show_content_or_excerpt',
+		array(
+			'label' => esc_html__( 'What To Show On Home and Archive Pages:', 'blogito' ),
+			'section' => 'home_page',
+			'type' => 'select',
+			'choices' => array(
+				'excerpt' => esc_html__( 'Excerpt', 'blogito' ),
+				'content' => esc_html__( 'Content', 'blogito' ),
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'excerpt_length',
+		array(
+			'default' => 55,
+			'sanitize_callback' => 'absint',
+		)
+	);
+
+	$wp_customize->add_control(
+		'excerpt_length',
+		array(
+			'label' => esc_html__( 'Excerpt Length', 'blogito' ),
+			'section' => 'home_page',
+			'description' => esc_html__( '(in words)', 'blogito' ),
+			'type' => 'number',
+			'input_attrs' => array(
+				'min' => 0,
+				'max' => 100,
+				'step' => 1,
 			),
 		)
 	);
@@ -695,5 +748,19 @@ function blogito_sanitize_select_header_display( $value ) {
 function blogito_sanitize_gallery_class( $value ) {
 	if ( in_array( $value, array( '.gallery', '.format-gallery .gallery', '' ), true ) ) {
 	return $value;
+	}
+}
+
+/**
+ * Sanitize select.
+ *
+ * @param type $value user input.
+ * @return type
+ */
+function blogito_sanitize_select_show_content_or_excerpt( $value ) {
+	if ( in_array( $value, array( 'content', 'excerpt' ), true ) ) {
+		return $value;
+	} else {
+		return 'content';
 	}
 }
