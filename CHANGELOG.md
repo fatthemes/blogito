@@ -1,10 +1,11 @@
 # Changes to Blogito
 
-## [1.3.4] - 2018-10-28
+## [1.4] - 2018-12-21
 
-### Changed
-- tested up to 4.9.8 (WP version)
-- author urls
+### Added
+- option to display excerpts on blog and archive pages
+- block editor (Gutenberg) compatibility tested
+- support for AMP plugin
 
 ## [1.3.3] - 2018-05-28
 
