@@ -35,7 +35,7 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 					<span class="featured-category">
 						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>
-					<h2 class="blogito-featured-slider-header"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo get_the_title(); ?></a></h2>
+					<h2 class="blogito-featured-slider-header"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 					</div>
 					<?php echo blogito_post_format_icon( $the_slider->ID ); // WPCS: XSS OK. ?>
 				</div>
@@ -45,7 +45,7 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 					<span class="featured-category">
 						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>
-					<h2 class="blogito-featured-slider-header"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php echo get_the_title(); ?></a></h2>
+					<h2 class="blogito-featured-slider-header"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 					</div>
 				</div>
 				<?php endif; ?>

@@ -316,7 +316,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 			the_excerpt();
 		} else {
 			// Translators: page/post title.
-			the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) )  );
+			the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
 		}
 	}
 
@@ -425,8 +425,8 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 	endif;
 
 	/*
-     * CSS output from customizer settings
-     */
+	 * CSS output from customizer settings
+	 */
 	if ( ! function_exists( 'blogito_customize_css' ) ) :
 
 	/**

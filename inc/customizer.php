@@ -151,7 +151,7 @@ function blogito_customize_register( $wp_customize ) {
 			'description' => esc_html__( 'Blog Home Page Settings', 'blogito' ),
 		)
 	);
-	
+
 	$wp_customize->add_setting(
 		'home_page_layout',
 		array(
@@ -356,7 +356,7 @@ function blogito_customize_register( $wp_customize ) {
 			),
 		)
 	);
-	
+
 	$wp_customize->add_setting(
 		'show_content_or_excerpt',
 		array(
