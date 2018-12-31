@@ -2,7 +2,7 @@
 /**
  * AMP support
  *
- * @package blover
+ * @package blogito
  */
 
 add_action( 'amp_post_template_css', 'blover_amp_additional_css_styles' );
