@@ -34,15 +34,15 @@
 	<div class="featured-media row">
 	<div class="single-featured-image col-xs-12">
 		<?php
-		$featured_audio = hybrid_media_grabber(
+		$blogito_featured_audio = hybrid_media_grabber(
 			array(
 				'type' => 'audio',
 			)
 		);
-		if ( ! empty( $featured_audio ) ) {
-		echo $featured_audio; // WPCS: XSS OK.
+		if ( ! empty( $blogito_featured_audio ) ) {
+			echo $blogito_featured_audio; // WPCS: XSS OK.
 		} elseif ( has_post_thumbnail() && get_theme_mod( 'single_post_show_featured_image', 1 ) ) {
-		the_post_thumbnail();
+			the_post_thumbnail();
 		}
 		?>
 	</div>

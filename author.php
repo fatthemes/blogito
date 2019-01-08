@@ -14,7 +14,7 @@ get_header();
 	$blogito_home_page_layout = get_theme_mod( 'home_page_layout', 'classic' );
 	echo ( empty( $blogito_home_page_layout ) ) ? ' col-md-12' : ' col-lg-8';
 	if ( ! empty( $blogito_home_page_layout ) && ! is_active_sidebar( 'sidebar-1' ) ) :
-	echo ' col-lg-push-2';
+		echo ' col-lg-push-2';
 	endif;
 	?>
 	 ">
@@ -72,9 +72,9 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-		<?php
-		/* Start the Loop */
-		while ( have_posts() ) :
+			<?php
+			/* Start the Loop */
+			while ( have_posts() ) :
 				the_post();
 
 				/*
@@ -87,11 +87,11 @@ get_header();
 
 				<?php endwhile; ?>
 
-		<?php the_posts_navigation(); ?>
+			<?php the_posts_navigation(); ?>
 
 		<?php else : ?>
 
-		<?php get_template_part( 'template-parts/content', 'none' ); ?>
+			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
 		<?php endif; ?>
 
@@ -100,7 +100,7 @@ get_header();
 
 	<?php
 	if ( ! empty( $blogito_home_page_layout ) ) {
-	get_sidebar();
+		get_sidebar();
 	}
 	?>
 </div><!-- .row -->

@@ -26,7 +26,7 @@ function blogito_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
-		$wp_customize,
+			$wp_customize,
 			'home_page_bg_color',
 			array(
 				'label' => esc_html__( 'Home/Archive Background Color', 'blogito' ),
@@ -46,7 +46,7 @@ function blogito_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
-		$wp_customize,
+			$wp_customize,
 			'sidebar_bg_color_1',
 			array(
 				'label' => esc_html__( 'Sidebar Background Color 1', 'blogito' ),
@@ -67,7 +67,7 @@ function blogito_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
-		$wp_customize,
+			$wp_customize,
 			'sidebar_bg_color_2',
 			array(
 				'label' => esc_html__( 'Sidebar Background Color 2', 'blogito' ),
@@ -88,7 +88,7 @@ function blogito_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
-		$wp_customize,
+			$wp_customize,
 			'sidebar_bg_color_3',
 			array(
 				'label' => esc_html__( 'Sidebar Background Color 3', 'blogito' ),
@@ -109,7 +109,7 @@ function blogito_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
-		$wp_customize,
+			$wp_customize,
 			'button_color',
 			array(
 				'label' => esc_html__( 'Buttons color', 'blogito' ),
@@ -245,15 +245,15 @@ function blogito_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		 'home_page_slider_play_speed',
+		'home_page_slider_play_speed',
 		array(
 			'default'        => 0,
 			'sanitize_callback' => 'absint',
 		)
-		);
+	);
 
 	$wp_customize->add_control(
-		 'home_page_slider_play_speed',
+		'home_page_slider_play_speed',
 		array(
 			'label'   => esc_html__( 'Sliding speed of Home Page Slider (in ms)', 'blogito' ),
 			'section' => 'home_page',
@@ -265,7 +265,7 @@ function blogito_customize_register( $wp_customize ) {
 				'step'  => 100,
 			),
 		)
-		);
+	);
 
 	$wp_customize->add_setting(
 		'home_page_latest_posts_text',
@@ -685,7 +685,7 @@ add_action( 'customize_preview_init', 'blogito_customize_preview_js' );
  */
 function blogito_sanitize_select_home_page_layout( $value ) {
 	if ( in_array( $value, array( '', 'list', 'masonry', 'classic' ), true ) ) {
-	return $value;
+		return $value;
 	}
 }
 
@@ -697,7 +697,7 @@ function blogito_sanitize_select_home_page_layout( $value ) {
  */
 function blogito_sanitize_pagination( $value ) {
 	if ( in_array( $value, array( 'ajax', 'infinite', '' ), true ) ) {
-	return $value;
+		return $value;
 	}
 }
 
@@ -709,9 +709,9 @@ function blogito_sanitize_pagination( $value ) {
  */
 function blogito_sanitize_select_home_page_slider_img_size( $value ) {
 	if ( in_array( $value, array( 'thumbnail', 'medium', 'large', 'full' ), true ) ) {
-	return $value;
+		return $value;
 	} else {
-	return 'full';
+		return 'full';
 	}
 }
 
@@ -723,7 +723,7 @@ function blogito_sanitize_select_home_page_slider_img_size( $value ) {
  */
 function blogito_sanitize_bottom_widget_area_width( $value ) {
 	if ( in_array( $value, array( '-fluid', '' ), true ) ) {
-	return $value;
+		return $value;
 	}
 }
 
@@ -735,7 +735,7 @@ function blogito_sanitize_bottom_widget_area_width( $value ) {
  */
 function blogito_sanitize_select_header_display( $value ) {
 	if ( in_array( $value, array( 'front', 'always', '' ), true ) ) {
-	return $value;
+		return $value;
 	}
 }
 
@@ -747,7 +747,7 @@ function blogito_sanitize_select_header_display( $value ) {
  */
 function blogito_sanitize_gallery_class( $value ) {
 	if ( in_array( $value, array( '.gallery', '.format-gallery .gallery', '' ), true ) ) {
-	return $value;
+		return $value;
 	}
 }
 

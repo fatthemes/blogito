@@ -27,11 +27,11 @@ get_header();
 	$blogito_home_page_layout = get_theme_mod( 'home_page_layout', 'classic' );
 	echo ( empty( $blogito_home_page_layout ) ) ? ' col-md-12' : ' col-lg-8';
 	if ( ! empty( $blogito_home_page_layout ) && ! is_active_sidebar( 'sidebar-1' ) ) :
-	echo ' col-lg-push-2';
+		echo ' col-lg-push-2';
 	endif;
 	?>
 	 ">
-		 <?php if ( get_theme_mod( 'home_page_latest_posts_text', 1 ) ) : ?>
+			<?php if ( get_theme_mod( 'home_page_latest_posts_text', 1 ) ) : ?>
 		<div class="blogito-page-intro">
 			<h2><span><?php echo esc_html__( 'Latest Posts', 'blogito' ); ?></span></h2>
 			<p id="today-date"></p>
@@ -41,25 +41,25 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-		<?php
-		/* Start the Loop */
-		while ( have_posts() ) :
-			the_post();
+			<?php
+			/* Start the Loop */
+			while ( have_posts() ) :
+				the_post();
 
-			if ( ! is_sticky() ) :
-			/*
-			 * Include the Post-Format-specific template for the content.
-			 * If you want to override this in a child theme, then include a file
-			 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-			 */
-			get_template_part( 'template-parts/content-home', $blogito_home_page_layout );
-			?>
-			<?php endif; ?>
-		<?php endwhile; ?>
+				if ( ! is_sticky() ) :
+					/*
+					* Include the Post-Format-specific template for the content.
+					* If you want to override this in a child theme, then include a file
+					* called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					*/
+					get_template_part( 'template-parts/content-home', $blogito_home_page_layout );
+					?>
+				<?php endif; ?>
+			<?php endwhile; ?>
 
 		<?php else : ?>
 
-		<?php get_template_part( 'template-parts/content', 'none' ); ?>
+			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
 		<?php endif; ?>
 
@@ -76,7 +76,7 @@ get_header();
 
 	<?php
 	if ( ! empty( $blogito_home_page_layout ) ) {
-	get_sidebar();
+		get_sidebar();
 	}
 	?>
 </div><!-- .row -->

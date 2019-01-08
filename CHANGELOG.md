@@ -1,5 +1,13 @@
 # Changes to Blogito
 
+## [1.4.1] - 2019-01-08
+
+### Fixed
+- related posts css issue on mobiles
+
+### Changed
+- Compatibility with new theme coding standards
+
 ## [1.4] - 2018-12-21
 
 ### Added

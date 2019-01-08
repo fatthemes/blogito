@@ -33,15 +33,15 @@
 	<div class="featured-media row">
 	<div class="single-featured-image col-xs-12">
 		<?php
-		$featured_gallery = hybrid_media_grabber(
+		$blogito_featured_gallery = hybrid_media_grabber(
 			array(
 				'type' => 'gallery',
 			)
 		);
-		if ( ! empty( $featured_gallery ) ) {
-		echo $featured_gallery; // WPCS: XSS OK.
+		if ( ! empty( $blogito_featured_gallery ) ) {
+			echo $blogito_featured_gallery; // WPCS: XSS OK.
 		} elseif ( has_post_thumbnail() && get_theme_mod( 'single_post_show_featured_image', 1 ) ) {
-		the_post_thumbnail();
+			the_post_thumbnail();
 		}
 		?>
 	</div>
