@@ -5,14 +5,14 @@
  * @package blogito
  */
 
-add_action( 'amp_post_template_css', 'blover_amp_additional_css_styles' );
+add_action( 'amp_post_template_css', 'blogito_amp_additional_css_styles' );
 
 /**
  * Custom CSS for AMP.
  *
  * @param type $amp_template amp plugin template.
  */
-function blover_amp_additional_css_styles( $amp_template ) {
+function blogito_amp_additional_css_styles( $amp_template ) {
 	?>
 	body, .amp-wp-title, .amp-wp-meta, .amp-wp-header div, .wp-caption-text, .amp-wp-tax-category, .amp-wp-tax-tag, .amp-wp-comments-link, .amp-wp-footer p, .back-to-top {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

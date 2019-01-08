@@ -9,10 +9,10 @@
 
 if ( ! class_exists( 'Blogito_Meta_For_Categories' ) ) {
 
-/**
- * Class for managing extra metadata for categories.
- */
-class Blogito_Meta_For_Categories {
+	/**
+	 * Class for managing extra metadata for categories.
+	 */
+	class Blogito_Meta_For_Categories {
 
 		/**
 		 * Class constructor.
@@ -33,7 +33,7 @@ class Blogito_Meta_For_Categories {
 				add_action( 'edit_category', array( $this, 'save_term_image' ) );
 				add_action( 'create_category', array( $this, 'save_term_image' ) );
 				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-			}
+		}
 
 		/**
 		 * Registering meta keys.
@@ -43,7 +43,7 @@ class Blogito_Meta_For_Categories {
 				register_meta( 'term', 'bg_color', 'sanitize_hex_color_no_hash' );
 				register_meta( 'term', 'text_color', 'sanitize_hex_color_no_hash' );
 				register_meta( 'term', 'image', 'absint' );
-			}
+		}
 
 		/**
 		 * Geting background category color.
@@ -58,7 +58,7 @@ class Blogito_Meta_For_Categories {
 				$color = sanitize_hex_color_no_hash( $color );
 
 				return $hash && $color ? "#{$color}" : $color;
-			}
+		}
 
 				/**
 				 * Geting category text color.
@@ -73,7 +73,7 @@ class Blogito_Meta_For_Categories {
 				$color = sanitize_hex_color_no_hash( $color );
 
 				return $hash && $color ? "#{$color}" : $color;
-			}
+		}
 
 		/**
 		 * Geting category image.
@@ -86,7 +86,7 @@ class Blogito_Meta_For_Categories {
 				$imageid = get_term_meta( $term_id, 'image', true );
 
 				return $imageid;
-			}
+		}
 
 		/**
 		 * New term screen background color field.
@@ -99,7 +99,7 @@ class Blogito_Meta_For_Categories {
 					<label for="mfc-term-bg-color"><?php esc_html_e( 'Background Color', 'blogito' ); ?></label>
 					<input type="text" name="mfc_term_bg_color" id="mfc-term-bg-color" value="" class="mfc-bg-color-field" data-default-color="#fff" />
 				</div>
-		<?php
+			<?php
 		}
 
 				/**
@@ -108,13 +108,13 @@ class Blogito_Meta_For_Categories {
 		public function new_term_text_color_field() {
 
 				wp_nonce_field( basename( __FILE__ ), 'mfc_term_text_color_nonce' );
-				?>
+			?>
 
 				<div class="form-field mfc-term-text-color-wrap">
 					<label for="mfc-term-text-color"><?php esc_html_e( 'Text Color', 'blogito' ); ?></label>
 					<input type="text" name="mfc_term_text_color" id="mfc-term-text-color" value="" class="mfc-text-color-field" data-default-color="#000" />
 				</div>
-		<?php
+			<?php
 		}
 
 		/**
@@ -127,9 +127,9 @@ class Blogito_Meta_For_Categories {
 				$default = '#ffffff';
 				$color   = $this->get_term_bg_color( $term->term_id, true );
 
-				if ( ! $color ) {
+			if ( ! $color ) {
 				$color = $default; }
-				?>
+			?>
 
 				<tr class="form-field mfc-term-bg-color-wrap">
 					<th scope="row"><label for="mfc-term-bg-color"><?php esc_html_e( 'Background Color', 'blogito' ); ?></label></th>
@@ -138,7 +138,7 @@ class Blogito_Meta_For_Categories {
 						<input type="text" name="mfc_term_bg_color" id="mfc-term-bg-color" value="<?php echo esc_attr( $color ); ?>" class="mfc-bg-color-field" data-default-color="<?php echo esc_attr( $default ); ?>" />
 					</td>
 				</tr>
-		<?php
+			<?php
 		}
 
 				/**
@@ -151,9 +151,9 @@ class Blogito_Meta_For_Categories {
 				$default = '#000000';
 				$color   = $this->get_term_text_color( $term->term_id, true );
 
-				if ( ! $color ) {
+			if ( ! $color ) {
 				$color = $default; }
-				?>
+			?>
 
 				<tr class="form-field mfc-term-text-color-wrap">
 					<th scope="row"><label for="mfc-term-text-color"><?php esc_html_e( 'Text Color', 'blogito' ); ?></label></th>
@@ -162,7 +162,7 @@ class Blogito_Meta_For_Categories {
 						<input type="text" name="mfc_term_text_color" id="mfc-term-text-color" value="<?php echo esc_attr( $color ); ?>" class="mfc-text-color-field" data-default-color="<?php echo esc_attr( $default ); ?>" />
 					</td>
 				</tr>
-		<?php
+			<?php
 		}
 
 		/**
@@ -173,7 +173,7 @@ class Blogito_Meta_For_Categories {
 		public function new_term_image_field( $term ) {
 
 				wp_nonce_field( basename( __FILE__ ), 'mfc_term_image_nonce' );
-				?>
+			?>
 
 				<div class="form-field mfc-category-form-field">
 					<label for="mfc_category_image_imageholder"><?php esc_html_e( 'Image', 'blogito' ); ?></label>
@@ -186,7 +186,7 @@ class Blogito_Meta_For_Categories {
 					</div>
 				</div>
 
-		<?php
+			<?php
 		}
 
 		/**
@@ -200,12 +200,12 @@ class Blogito_Meta_For_Categories {
 				$imageid = $this->get_term_image( $term->term_id, true );
 				$image = wp_get_attachment_image_src( $imageid );
 
-				if ( ! $image ) {
+			if ( ! $image ) {
 				$image = $default; }
 
-				if ( ! $imageid ) {
+			if ( ! $imageid ) {
 				$imageid = $default; }
-				?>
+			?>
 
 				<tr class="form-field mfc-category-form-field">
 
@@ -230,7 +230,7 @@ class Blogito_Meta_For_Categories {
 				</td>
 			</tr>    
 
-		<?php
+			<?php
 		}
 
 		/**
@@ -241,16 +241,16 @@ class Blogito_Meta_For_Categories {
 		 */
 		public function save_term_bg_color( $term_id ) {
 
-				if ( ! isset( $_POST['mfc_term_bg_color_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_bg_color_nonce'] ), basename( __FILE__ ) ) ) {
+			if ( ! isset( $_POST['mfc_term_bg_color_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_bg_color_nonce'] ), basename( __FILE__ ) ) ) {
 				return; }
 
 				$old_color = $this->get_term_bg_color( $term_id );
 				$new_color = isset( $_POST['mfc_term_bg_color'] ) ? sanitize_hex_color_no_hash( wp_unslash( $_POST['mfc_term_bg_color'] ) ) : '';
 
-				if ( $old_color && '' === $new_color ) {
+			if ( $old_color && '' === $new_color ) {
 				delete_term_meta( $term_id, 'bg_color' ); } else if ( $old_color !== $new_color ) {
 				update_term_meta( $term_id, 'bg_color', $new_color ); }
-				}
+		}
 
 				/**
 				 * Saving meta data - text color.
@@ -260,16 +260,16 @@ class Blogito_Meta_For_Categories {
 				 */
 		public function save_term_text_color( $term_id ) {
 
-				if ( ! isset( $_POST['mfc_term_text_color_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_text_color_nonce'] ), basename( __FILE__ ) ) ) {
+			if ( ! isset( $_POST['mfc_term_text_color_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_text_color_nonce'] ), basename( __FILE__ ) ) ) {
 				return; }
 
 				$old_color = $this->get_term_text_color( $term_id );
 				$new_color = isset( $_POST['mfc_term_text_color'] ) ? sanitize_hex_color_no_hash( wp_unslash( $_POST['mfc_term_text_color'] ) ) : '';
 
-				if ( $old_color && '' === $new_color ) {
+			if ( $old_color && '' === $new_color ) {
 				delete_term_meta( $term_id, 'text_color' ); } else if ( $old_color !== $new_color ) {
 				update_term_meta( $term_id, 'text_color', $new_color ); }
-				}
+		}
 
 		/**
 		 * Saving meta data - image.
@@ -279,16 +279,16 @@ class Blogito_Meta_For_Categories {
 		 */
 		public function save_term_image( $term_id ) {
 
-				if ( ! isset( $_POST['mfc_term_image_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_image_nonce'] ), basename( __FILE__ ) ) ) {
-			 return; }
+			if ( ! isset( $_POST['mfc_term_image_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['mfc_term_image_nonce'] ), basename( __FILE__ ) ) ) {
+				return; }
 
 				$old_image = $this->get_term_image( $term_id );
 				$new_image = isset( $_POST['mfc_term_image'] ) ? absint( $_POST['mfc_term_image'] ) : '';
 
-				if ( $old_image && '' === $new_image ) {
+			if ( $old_image && '' === $new_image ) {
 				delete_term_meta( $term_id, 'image' ); } else if ( $old_image !== $new_image ) {
 				update_term_meta( $term_id, 'image', $new_image ); }
-				}
+		}
 
 		/**
 		 * Enqueue admin scripts
@@ -298,17 +298,17 @@ class Blogito_Meta_For_Categories {
 		 */
 		public function admin_enqueue_scripts( $hook_suffix ) {
 
-				if ( ( 'edit-tags.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) && ( 'term.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) ) {
+			if ( ( 'edit-tags.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) && ( 'term.php' !== $hook_suffix || 'category' !== get_current_screen()->taxonomy ) ) {
 				return; }
 
 				wp_enqueue_media();
 
 				wp_enqueue_script(
-						'category-image-js',
-						get_template_directory_uri() . '/inc/js/categoryimage.js',
-						array( 'jquery', 'wp-color-picker' ),
-						'1.0.0',
-						true
+					'category-image-js',
+					get_template_directory_uri() . '/inc/js/categoryimage.js',
+					array( 'jquery', 'wp-color-picker' ),
+					'1.0.0',
+					true
 				);
 
 				$data = array(
@@ -320,17 +320,17 @@ class Blogito_Meta_For_Categories {
 				);
 
 				wp_localize_script(
-						'category-image-js',
-						'CategoryImage',
-						$data
+					'category-image-js',
+					'CategoryImage',
+					$data
 				);
 
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
 
-				}
-}
+		}
+	}
 
-new Blogito_Meta_For_Categories();
+	new Blogito_Meta_For_Categories();
 
 }// End if().
