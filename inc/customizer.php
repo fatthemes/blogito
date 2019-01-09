@@ -654,14 +654,31 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'gallery_class',
 		array(
-			'label' => esc_html__( 'Gallery Options', 'blogito' ),
+			'label' => esc_html__( 'Gallery Slider Options', 'blogito' ),
 			'section' => 'other_settings',
 			'type' => 'select',
 			'choices' => array(
-				'.gallery' => esc_html__( 'Gallery Styling For All Posts', 'blogito' ),
-				'.format-gallery .gallery' => esc_html__( 'Gallery Styling Only For Gallery Post Type', 'blogito' ),
-				'' => esc_html__( 'Disable Styling For All Galleries', 'blogito' ),
+				'.gallery' => esc_html__( 'Gallery Slider Styling For All Posts', 'blogito' ),
+				'.format-gallery .gallery' => esc_html__( 'Gallery Slider Styling Only For Gallery Post Type', 'blogito' ),
+				'' => esc_html__( 'Disable Slider Styling For All Galleries', 'blogito' ),
 			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'enable_magnific',
+		array(
+			'default' => 1,
+			'sanitize_callback' => 'wp_validate_boolean',
+		)
+	);
+
+	$wp_customize->add_control(
+		'enable_magnific',
+		array(
+			'label' => esc_html__( 'Enable Magnific Popup', 'blogito' ),
+			'section' => 'other_settings',
+			'type' => 'checkbox',
 		)
 	);
 }
