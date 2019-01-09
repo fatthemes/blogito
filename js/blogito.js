@@ -50,8 +50,27 @@
 
 		$blogitoFeaturedSliderImage.show();
 
-		// // Slick slider
+		// Classic editor
 		$blogitoGallery.slick( {
+		    //dots: true,
+		    infinite: true,
+		    //autoplay: true,
+		    speed: 1000,
+		    slidesToShow: 1,
+		    slidesToScroll: 1,
+		    responsive: [
+			{
+			    breakpoint: 480,
+			    settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1
+			    }
+			}
+		    ]
+		} );
+		
+		// Block editor
+		$('.wp-block-gallery').slick( {
 		    //dots: true,
 		    infinite: true,
 		    //autoplay: true,
@@ -74,6 +93,7 @@
 // // Magnific Popup
 	if ( typeof $.fn.magnificPopup === 'function' ) {
 // Gallery Images
+	    // Classic editor
 	    $( '.gallery' ).each( function () {
 		$( this ).magnificPopup( {
 		    delegate: '.gallery-item:not(.slick-cloned) a[href*=".jpg"], .gallery-item:not(.slick-cloned) a[href*=".jpeg"], .gallery-item:not(.slick-cloned) a[href*=".png"], .gallery-item:not(.slick-cloned) a[href*=".gif"]',
@@ -87,10 +107,25 @@
 		    }
 		} );
 	    } );
+	    
+	    // Block editor
+	    $( '.wp-block-gallery' ).each( function () {
+		$( this ).magnificPopup( {
+		    delegate: '.blocks-gallery-item figure:not(.slick-cloned) a[href*=".jpg"], .blocks-gallery-item figure:not(.slick-cloned) a[href*=".jpeg"], .blocks-gallery-item figure:not(.slick-cloned) a[href*=".png"], .blocks-gallery-item figure:not(.slick-cloned) a[href*=".gif"]',
+		    type: 'image',
+		    gallery: { enabled: true },
+		    image: {
+			titleSrc: function ( item ) {
+			    return item.el.parents( 'figure' ).children('figcaption').text();
+			},
+			cursor: null
+		    }
+		} );
+	    } );
 
 // Single Image
 	    $( 'a[href*=".jpg"], a[href*=".jpeg"], a[href*=".png"], a[href*=".gif"]' ).each( function () {
-		if ( $( this ).parents( '.gallery' ).length === 0 ) {
+		if ( $( this ).parents( '.gallery' ).length === 0 && $( this ).parents( '.wp-block-gallery' ).length === 0 ) {
 		    $( this ).magnificPopup( {
 			type: 'image',
 			image: {

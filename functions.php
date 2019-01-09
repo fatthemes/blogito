@@ -177,7 +177,9 @@ function blogito_scripts() {
 	$blogito_theme_info = wp_get_theme();
 	wp_enqueue_style( 'blogito-style', get_stylesheet_uri(), array(), $blogito_theme_info->get( 'Version' ) );
 
-	wp_enqueue_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
+	if( !empty(get_theme_mod( 'gallery_class', '.gallery' )) ) {
+		wp_enqueue_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
+	}
 
 	if ( ! is_singular() && ! is_404() && have_posts() ) {
 
@@ -190,7 +192,9 @@ function blogito_scripts() {
 		wp_enqueue_script( 'theia-sticky-sidebar', get_template_directory_uri() . '/js/theia-sticky-sidebar.min.js', array( 'jquery' ), '1.2.2', true );
 	}
 
-	wp_enqueue_script( 'magnific-popup', get_template_directory_uri() . '/js/jquery.magnific-popup.min.js', array( 'jquery' ), '20150829', true );
+	if( !empty(get_theme_mod( 'enable_magnific', 1 )) ) {
+		wp_enqueue_script( 'magnific-popup', get_template_directory_uri() . '/js/jquery.magnific-popup.min.js', array( 'jquery' ), '20150829', true );
+	}
 
 	wp_enqueue_script( 'blogito-scripts', get_template_directory_uri() . '/js/blogito.min.js', array( 'jquery', 'jquery-effects-core', 'jquery-effects-slide' ), '20160908', true );
 

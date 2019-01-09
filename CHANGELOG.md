@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.4.2] - 2019-01-09
+
+### Fixed
+- improved gallery support for new block editor
+
 ## [1.4.1] - 2019-01-08
 
 ### Fixed
