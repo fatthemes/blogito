@@ -664,7 +664,7 @@ function blogito_customize_register( $wp_customize ) {
 			),
 		)
 	);
-	
+
 	$wp_customize->add_setting(
 		'enable_magnific',
 		array(
