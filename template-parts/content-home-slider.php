@@ -10,6 +10,7 @@
 $blogito_sticky_posts = get_option( 'sticky_posts' );
 if ( ! empty( $blogito_sticky_posts ) ) :
 
+	wp_enqueue_script( 'slick' );
 	$blogito_args = array(
 		'posts_per_page' => 10,
 		'post__in' => $blogito_sticky_posts,

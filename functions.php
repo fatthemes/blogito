@@ -177,9 +177,11 @@ function blogito_scripts() {
 	$blogito_theme_info = wp_get_theme();
 	wp_enqueue_style( 'blogito-style', get_stylesheet_uri(), array(), $blogito_theme_info->get( 'Version' ) );
 
+	wp_register_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
 	$blogito_gallery_class = get_theme_mod( 'gallery_class', '.gallery' );
+	
 	if ( ! empty( $blogito_gallery_class ) ) {
-		wp_enqueue_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
+		wp_enqueue_script( 'slick' );
 	}
 
 	if ( ! is_singular() && ! is_404() && have_posts() ) {

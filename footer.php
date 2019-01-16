@@ -49,7 +49,10 @@
 	</nav><!-- #site-navigation -->
 	<?php get_sidebar( 'left' ); ?>
 	<div class="site-info">
-		<?php echo wp_kses_post( get_theme_mod( 'footer_text', '<p>&copy; 2016 ' . get_bloginfo( 'name' ) . '</p>' ) ); ?>
+		<?php 
+		$blogito_dafault_sidebar_text = '<p>&copy; ' . date_i18n( __( 'Y', 'blogito' ) ) . ' ' . get_bloginfo( 'name' ) . '</p>';
+		echo wp_kses_post( get_theme_mod( 'footer_text', $blogito_dafault_sidebar_text ) );
+		?>
 	</div><!-- .site-info -->
 	</div>
 </div>
