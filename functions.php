@@ -179,7 +179,7 @@ function blogito_scripts() {
 
 	wp_register_script( 'slick', get_template_directory_uri() . '/slick/slick.min.js', array( 'jquery' ), '20150828', true );
 	$blogito_gallery_class = get_theme_mod( 'gallery_class', '.gallery' );
-	
+
 	if ( ! empty( $blogito_gallery_class ) ) {
 		wp_enqueue_script( 'slick' );
 	}
