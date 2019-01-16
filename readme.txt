@@ -1,7 +1,17 @@
 === Blogito ===
 
+Contributors: limestreet, moniula
 Requires at least: 4.5
 Tested up to: 5.0.3
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: two-columns, three-columns, right-sidebar, grid-layout, custom-background, custom-colors, custom-menu, custom-logo, featured-images, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, blog, news
+
+ Blogito WordPress Theme, Copyright 2017-2019 Patryk Kachel, Monika Dziedzic
+ Blogito is distributed under the terms of the GNU GPL v2 or later
+
+== Description ==
+Say hello to Blogito a lifestyle blog with unique & clear design, created for anyone with story to share. Blogito is a modern WordPress Blog Theme crafted with high attention to details. This premium theme provides top quality design and can be used for blog, magazine, news, travel, fashion or other type website. Blogito is perfect fit for you. No Coding Skills Required. Tested with new block editor (Gutenberg). Support for AMP plugin.
 
 == Installation ==
 
@@ -9,7 +19,7 @@ Tested up to: 5.0.3
 2. Click Upload and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
 
-== Credits ==
+== Resources ==
 
 * Underscores - (C) 2012-2015 Automattic, Inc. License: GPL-2.0+
 * Bootstrap v4.0.0-alpha - Copyright 2011-2015 Twitter, Inc. Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
