@@ -1,5 +1,13 @@
 # Changes to Blogito
 
+## [1.4.3] - 2019-01-16
+
+### Fixed
+- Slider settings for home page slider
+
+### Changed
+- Screenshot changed to fit updated image policy on wp.org
+
 ## [1.4.2] - 2019-01-09
 
 ### Fixed
