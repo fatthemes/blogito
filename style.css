@@ -5,7 +5,7 @@ Theme URI: https://blogonyourown.com/themes/blogito/
 Author: BlogOnYourOwn.com
 Author URI: https://blogonyourown.com
 Description: Say hello to Blogito a lifestyle blog with unique & clear design, created for anyone with story to share. Blogito is a modern WordPress Blog Theme crafted with high attention to details. This premium theme provides top quality design and can be used for blog, magazine, news, travel, fashion or other type website. Blogito is perfect fit for you. No Coding Skills Required. Tested with new block editor (Gutenberg). Support for AMP plugin.
-Version: 1.4.3
+Version: 1.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: blogito
@@ -2356,11 +2356,18 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
 #secondary .widget_facebook_likebox, #tetriary .widget_facebook_likebox {
   text-align: center; }
 
+#top-widget {
+  margin-top: 2rem; }
+
 #bottom-widget .fat__widget-instagram .instagram-gallery, #top-widget .fat__widget-instagram .instagram-gallery {
   margin-left: -1rem;
   margin-right: -1rem; }
 #bottom-widget .widget-title, #bottom-widget .blogito-related-posts h3, .blogito-related-posts #bottom-widget h3, #bottom-widget .comments-title, #bottom-widget .comment-reply-title, #top-widget .widget-title, #top-widget .blogito-related-posts h3, .blogito-related-posts #top-widget h3, #top-widget .comments-title, #top-widget .comment-reply-title {
   margin-bottom: 1rem; }
+#bottom-widget .fat-wpp-list, #top-widget .fat-wpp-list {
+  padding-top: 2rem; }
+  #bottom-widget .fat-wpp-list .entry-title, #top-widget .fat-wpp-list .entry-title {
+    text-align: left; }
 
 @media (min-width: 34em) {
   #bottom-widget .fat__widget-instagram .instagram-gallery-columns-1 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-1 .instagram-gallery-item {
@@ -2369,6 +2376,17 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
   #bottom-widget .fat__widget-instagram .instagram-gallery-columns-2 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-3 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-4 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-5 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-6 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-7 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-8 .instagram-gallery-item, #bottom-widget .fat__widget-instagram .instagram-gallery-columns-9 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-2 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-3 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-4 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-5 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-6 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-7 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-8 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-9 .instagram-gallery-item {
     width: 50%;
     padding-bottom: calc( 50% - 30px ); } }
+@media (min-width: 48em) {
+  #bottom-widget .fat-wpp-list, #top-widget .fat-wpp-list {
+    display: flex;
+    flex-wrap: wrap; }
+    #bottom-widget .fat-wpp-list li, #top-widget .fat-wpp-list li {
+      width: 50%;
+      padding: 0 1rem; }
+      #bottom-widget .fat-wpp-list li:nth-of-type(2n), #top-widget .fat-wpp-list li:nth-of-type(2n) {
+        padding-right: 0; }
+      #bottom-widget .fat-wpp-list li:nth-of-type(2n+1), #top-widget .fat-wpp-list li:nth-of-type(2n+1) {
+        padding-left: 0; } }
 @media (min-width: 62em) {
   #bottom-widget .fat__widget-instagram .instagram-gallery-columns-1 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-1 .instagram-gallery-item {
     width: 100%;
@@ -2396,7 +2414,22 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
     padding-bottom: calc( 12.5% - 30px ); }
   #bottom-widget .fat__widget-instagram .instagram-gallery-columns-9 .instagram-gallery-item, #top-widget .fat__widget-instagram .instagram-gallery-columns-9 .instagram-gallery-item {
     width: 11.11%;
-    padding-bottom: calc( 11.11% - 30px ); } }
+    padding-bottom: calc( 11.11% - 30px ); }
+  #bottom-widget .fat-wpp-list li, #top-widget .fat-wpp-list li {
+    width: 25%;
+    padding: 0.5rem; }
+    #bottom-widget .fat-wpp-list li:nth-of-type(2n), #top-widget .fat-wpp-list li:nth-of-type(2n) {
+      padding-right: 0.625rem;
+      padding-left: 0.25rem; }
+    #bottom-widget .fat-wpp-list li:nth-of-type(2n+1), #top-widget .fat-wpp-list li:nth-of-type(2n+1) {
+      padding-left: 0.625rem;
+      padding-right: 0.25rem; }
+    #bottom-widget .fat-wpp-list li:nth-of-type(4n), #top-widget .fat-wpp-list li:nth-of-type(4n) {
+      padding-right: 0;
+      padding-left: 1rem; }
+    #bottom-widget .fat-wpp-list li:nth-of-type(4n+1), #top-widget .fat-wpp-list li:nth-of-type(4n+1) {
+      padding-left: 0;
+      padding-right: 1rem; } }
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
@@ -2749,6 +2782,13 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
 .more-link {
   display: block;
   margin-top: 1rem; }
+
+.blogito-featured-slider-post-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
 
 /*--------------------------------------------------------------
 ## Asides

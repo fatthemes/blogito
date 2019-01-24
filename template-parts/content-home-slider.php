@@ -33,6 +33,9 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 				<div class="featured-image" style="background:#000 url(<?php the_post_thumbnail_url( get_theme_mod( 'home_page_slider_img_size', 'full' ) ); ?>) no-repeat center;background-size: cover;"></div>
 				<div class="blogito-featured-slider-title-wrapper">
 					<div class="blogito-featured-slider-title">
+						<?php if ( get_theme_mod( 'home_page_slider_clickable_images', 0 ) ) : ?>
+						<a class="blogito-featured-slider-post-link" href="<?php the_permalink(); ?>" rel="bookmark"></a>
+						<?php endif; ?>
 					<span class="featured-category">
 						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>
@@ -43,6 +46,9 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 				<?php else : ?>
 				<div class="no-featured-image">
 					<div class="blogito-featured-slider-title">
+						<?php if ( get_theme_mod( 'home_page_slider_clickable_images', 0 ) ) : ?>
+						<a class="blogito-featured-slider-post-link" href="<?php the_permalink(); ?>" rel="bookmark"></a>
+						<?php endif; ?>
 					<span class="featured-category">
 						<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 					</span>

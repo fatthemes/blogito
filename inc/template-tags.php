@@ -280,7 +280,7 @@ if ( ! function_exists( 'blogito_custom_popular_posts_html_list' ) ) :
 			$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
 
 			$output .= '<li>';
-			$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' /* . blogito_post_format_icon( $popular->id ) */ . $thumb . '</a>' : '';
+			$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $thumb . '</a>' : '';
 			$output .= blogito_post_format_icon( $popular->id );
 			$output .= ( ! empty( $post_cat ) ) ? '<div class="fat-wpp-image-cat">' . $post_cat . '</div>' : '';
 			$output .= ( ! empty( $thumb ) ) ? '</div>' : '';
