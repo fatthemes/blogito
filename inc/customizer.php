@@ -268,6 +268,23 @@ function blogito_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'home_page_slider_clickable_images',
+		array(
+			'default' => 0,
+			'sanitize_callback' => 'wp_validate_boolean',
+		)
+	);
+
+	$wp_customize->add_control(
+		'home_page_slider_clickable_images',
+		array(
+			'label' => esc_html__( 'Enable Whole Images Clickable in Slider', 'blogito' ),
+			'section' => 'home_page',
+			'type' => 'checkbox',
+		)
+	);
+
+	$wp_customize->add_setting(
 		'home_page_latest_posts_text',
 		array(
 			'default' => 1,

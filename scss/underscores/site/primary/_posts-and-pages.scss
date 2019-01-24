@@ -563,3 +563,11 @@ body:not(.home) .site-content {
     display: block;
     margin-top: $grid-gutter-width / 2;
 }
+
+.blogito-featured-slider-post-link {
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
