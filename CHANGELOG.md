@@ -1,5 +1,11 @@
 # Changes to Blogito
 
+## [1.5] - 2018-01-24
+
+### Added
+- Option to click full images instead in slider of just title
+- Basic styling added for popular posts widget in top widget area
+
 ## [1.4.3] - 2019-01-16
 
 ### Fixed
