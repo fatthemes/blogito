@@ -1,6 +1,6 @@
 # Changes to Blogito
 
-## [1.5] - 2018-01-24
+## [1.5] - 2019-01-24
 
 ### Added
 - Option to click full images instead in slider of just title
