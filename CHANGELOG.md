@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.5.1] - 2019-07-06
+
+### Fixed
+- Comments container overflowing content in posts on mobile
+
 ## [1.5] - 2019-01-24
 
 ### Added
