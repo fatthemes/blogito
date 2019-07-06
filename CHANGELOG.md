@@ -1,6 +1,11 @@
 # Changes to Blogito
 
-## [1.5] - 2018-01-24
+## [1.5.1] - 2019-07-06
+
+### Fixed
+- Comments container overflowing content in posts on mobile
+
+## [1.5] - 2019-01-24
 
 ### Added
 - Option to click full images instead in slider of just title
