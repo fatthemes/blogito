@@ -47,13 +47,6 @@ function blogito_register_required_plugins() {
 			'required' => false,
 		),
 
-		// Instagram Slider Widget from WordPress Plugin Repository.
-		array(
-			'name'      => 'Instagram Slider Widget',
-			'slug'      => 'instagram-slider-widget',
-			'required'  => false,
-		),
-
 		// Jetpack by WordPress.com from WordPress Plugin Repository.
 		array(
 			'name'      => 'Jetpack by WordPress.com',
