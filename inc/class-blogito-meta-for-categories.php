@@ -331,5 +331,4 @@ if ( ! class_exists( 'Blogito_Meta_For_Categories' ) ) {
 		}
 	}
 	new Blogito_Meta_For_Categories();
-
 }// End if().
