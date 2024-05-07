@@ -1,0 +1,52 @@
+name: Basic Tests
+on: 
+  push:
+    branches-ignore:
+    - master
+
+jobs:
+  release-on-push:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 'latest'
+
+      - name: Check "Tested Up To"
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
+          CURRENT_WP_VERSION_API=`curl https://api.wordpress.org/core/version-check/1.7/ | jq '.["offers"][0].current'`
+          CURRENT_WP_VERSION=`echo "$CURRENT_WP_VERSION_API" | sed 's/"//g'`
+          echo $CURRENT_WP_VERSION
+          README_TESTED_UP_TO_WP_LINE=$(grep -Po "Tested\ up\ to:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" $PWD/readme.txt)
+          README_TESTED_UP_TO_WP=$(echo $README_TESTED_UP_TO_WP_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
+          echo $README_TESTED_UP_TO_WP
+          if [ $README_TESTED_UP_TO_WP != $CURRENT_WP_VERSION ]; then echo "readme.txt - tested up to - use $CURRENT_WP_VERSION instead of $README_TESTED_UP_TO_WP" && exit 1 ;fi
+          STYLE_TESTED_UP_TO_WP_LINE=$(grep -Po "Tested\ up\ to:\s?\s?\d\d?\.\d\d?\.?\d?\d?.*" $PWD/style.css)
+          STYLE_TESTED_UP_TO_WP=$(echo $STYLE_TESTED_UP_TO_WP_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
+          echo $STYLE_TESTED_UP_TO_WP
+          if [ $STYLE_TESTED_UP_TO_WP != $CURRENT_WP_VERSION ]; then echo "style.css - tested up to - use $CURRENT_WP_VERSION instead of $STYLE_TESTED_UP_TO_WP" && exit 1 ;fi
+
+      - name: Basic Code and Syntax Check - latest PHP
+        run: |
+          composer install
+          sudo npm install -g jshint
+          jshint .
+          php -v
+          find -L . -name '*.php' -not -path "*node_modules*" -not -path "*vendor*" -not -path "*php-codesniffer*" -not -path ".*" -print0 | xargs -0 -n 1 -P 4 php -l
+
+      - name: WP Coding Standards test - latest PHP
+        run: ./vendor/bin/phpcs -p -s -v -n . --standard=./phpcs.ruleset.xml --extensions=php --ignore=*/node_modules/*,*/vendor/*,class-tgm-plugin-activation.php,class-media-grabber.php,get-the-image.php
+          
+      - name: Setup PHP 5.6.30
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.6.30' # min supported wp version -> https://wordpress.org/about/requirements/
+
+      - name: Codetest - PHP 5.6.30
+        run: |
+          php -v
+          find -L . -name '*.php' -not -path "*node_modules*" -not -path "*vendor*" -not -path "*php-codesniffer*" -not -path ".*" -print0 | xargs -0 -n 1 -P 4 php -l
