@@ -40,7 +40,7 @@
 			)
 		);
 		if ( ! empty( $blogito_featured_audio ) ) {
-			echo $blogito_featured_audio; // WPCS: XSS OK.
+			echo esc_html( $blogito_featured_audio );
 		} elseif ( has_post_thumbnail() && get_theme_mod( 'single_post_show_featured_image', 1 ) ) {
 			the_post_thumbnail();
 		}

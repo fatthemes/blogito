@@ -34,14 +34,14 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 					'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 				);
 
-				echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+				echo '<span class="posted-on">' . esc_html( $posted_on ) . '</span><span class="byline"> ' . esc_html( $byline ) . '</span>'; 
 		} else {
 
 			$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_attr( get_the_date() ) );
 
 			$posted_on = '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
 
-			echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+			echo '<span class="posted-on">' . esc_html( $posted_on ) . '</span>';
 		}
 	}
 
@@ -62,7 +62,7 @@ if ( ! function_exists( 'blogito_entry_footer' ) ) :
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = get_the_tag_list( '', esc_html__( ', ', 'blogito' ) );
 			if ( $tags_list ) { /* translators: related tag list */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'blogito' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'blogito' ) . '</span>', esc_html( $tags_list ) );
 			}
 		}
 
@@ -337,9 +337,9 @@ if ( ! function_exists( 'blogito_gallery_content' ) ) :
 		$replacement = '';
 
 		$newcontent = preg_replace( $pattern, $replacement, $content, 1 );
-		$newcontent = apply_filters( 'the_content', $newcontent ); // WPCS: prefix ok.
+		$newcontent = apply_filters( 'the_content', $newcontent ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$newcontent = str_replace( ']]>', ']]&gt;', $newcontent );
-		echo $newcontent; // WPCS: XSS OK.
+		echo esc_html( $newcontent );
 	}
 
 	endif;
@@ -354,7 +354,7 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 	function blogito_media_content() {
 		// $content = get_the_content( sprintf( __( '<button>Read more %s</button>', 'blogito' ), the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) );
 		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
-		$content = apply_filters( 'the_content', $content ); // WPCS: prefix ok.
+		$content = apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
 		$tags = 'audio|video|object|embed|iframe';
@@ -363,7 +363,7 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 
 		$newcontent = preg_replace( '#<(?P<tag>' . $tags . ')[^<]*?(?:>[\s\S]*?<\/(?P=tag)>|\s*\/>)#', $replacement, $content, 1 );
 
-		echo $newcontent; // WPCS: XSS OK.
+		echo esc_html( $newcontent );
 	}
 
 	endif;
@@ -410,15 +410,12 @@ if ( ! function_exists( 'blogito_post_format_icon' ) ) :
 		if ( ! $format ) {
 
 			return;
-		} else {
-
-			if ( 'audio' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M17.297 11.016h1.688q0 2.531-1.758 4.43t-4.242 2.273v3.281h-1.969v-3.281q-2.484-0.375-4.242-2.273t-1.758-4.43h1.688q0 2.203 1.57 3.633t3.727 1.43 3.727-1.43 1.57-3.633zM10.781 4.922v6.188q0 0.469 0.352 0.82t0.867 0.352q0.469 0 0.82-0.328t0.352-0.844l0.047-6.188q0-0.516-0.375-0.867t-0.844-0.352-0.844 0.352-0.375 0.867zM12 14.016q-1.219 0-2.109-0.891t-0.891-2.109v-6q0-1.219 0.891-2.109t2.109-0.891 2.109 0.891 0.891 2.109v6q0 1.219-0.891 2.109t-2.109 0.891z"></path></svg></div>';
-			} elseif ( 'video' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M9 9.984l6.984 4.031-6.984 3.984v-8.016zM21 20.016v-12h-18v12h18zM21 6q0.797 0 1.406 0.586t0.609 1.43v12q0 0.797-0.609 1.383t-1.406 0.586h-18q-0.797 0-1.406-0.586t-0.609-1.383v-12q0-0.844 0.609-1.43t1.406-0.586h7.594l-3.281-3.281 0.703-0.703 3.984 3.984 3.984-3.984 0.703 0.703-3.281 3.281h7.594z"></path></svg></div>';
-			} elseif ( 'gallery' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M3.984 12.984v7.031h7.031v1.969h-7.031q-0.797 0-1.383-0.586t-0.586-1.383v-7.031h1.969zM20.016 20.016v-7.031h1.969v7.031q0 0.797-0.586 1.383t-1.383 0.586h-7.031v-1.969h7.031zM20.016 2.016q0.797 0 1.383 0.586t0.586 1.383v7.031h-1.969v-7.031h-7.031v-1.969h7.031zM17.016 8.484q0 0.609-0.445 1.055t-1.055 0.445-1.055-0.445-0.445-1.055 0.445-1.055 1.055-0.445 1.055 0.445 0.445 1.055zM9.984 12.984l3 3.703 2.016-2.672 3 3.984h-12zM3.984 3.984v7.031h-1.969v-7.031q0-0.797 0.586-1.383t1.383-0.586h7.031v1.969h-7.031z"></path></svg></div>';
-			}
+		} elseif ( 'audio' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M17.297 11.016h1.688q0 2.531-1.758 4.43t-4.242 2.273v3.281h-1.969v-3.281q-2.484-0.375-4.242-2.273t-1.758-4.43h1.688q0 2.203 1.57 3.633t3.727 1.43 3.727-1.43 1.57-3.633zM10.781 4.922v6.188q0 0.469 0.352 0.82t0.867 0.352q0.469 0 0.82-0.328t0.352-0.844l0.047-6.188q0-0.516-0.375-0.867t-0.844-0.352-0.844 0.352-0.375 0.867zM12 14.016q-1.219 0-2.109-0.891t-0.891-2.109v-6q0-1.219 0.891-2.109t2.109-0.891 2.109 0.891 0.891 2.109v6q0 1.219-0.891 2.109t-2.109 0.891z"></path></svg></div>';
+		} elseif ( 'video' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M9 9.984l6.984 4.031-6.984 3.984v-8.016zM21 20.016v-12h-18v12h18zM21 6q0.797 0 1.406 0.586t0.609 1.43v12q0 0.797-0.609 1.383t-1.406 0.586h-18q-0.797 0-1.406-0.586t-0.609-1.383v-12q0-0.844 0.609-1.43t1.406-0.586h7.594l-3.281-3.281 0.703-0.703 3.984 3.984 3.984-3.984 0.703 0.703-3.281 3.281h7.594z"></path></svg></div>';
+		} elseif ( 'gallery' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M3.984 12.984v7.031h7.031v1.969h-7.031q-0.797 0-1.383-0.586t-0.586-1.383v-7.031h1.969zM20.016 20.016v-7.031h1.969v7.031q0 0.797-0.586 1.383t-1.383 0.586h-7.031v-1.969h7.031zM20.016 2.016q0.797 0 1.383 0.586t0.586 1.383v7.031h-1.969v-7.031h-7.031v-1.969h7.031zM17.016 8.484q0 0.609-0.445 1.055t-1.055 0.445-1.055-0.445-0.445-1.055 0.445-1.055 1.055-0.445 1.055 0.445 0.445 1.055zM9.984 12.984l3 3.703 2.016-2.672 3 3.984h-12zM3.984 3.984v7.031h-1.969v-7.031q0-0.797 0.586-1.383t1.383-0.586h7.031v1.969h-7.031z"></path></svg></div>';
 		}
 	}
 
@@ -693,7 +690,7 @@ function blogito_the_site_branding() {
 		}
 		$output .= '</div><!-- .site-branding -->';
 	}
-	echo $output; // WPCS: XSS OK.
+	echo esc_html( $output );
 }
 
 if ( ! function_exists( 'blogito_excerpt_length' ) ) :

@@ -18,7 +18,7 @@
 			</a>
 		</div>
 	<?php endif; ?>
-	<?php echo blogito_post_format_icon( get_the_ID() ); // WPCS: XSS OK. ?>
+	<?php echo esc_html( blogito_post_format_icon( get_the_ID() ) ); ?>
 	<header class="entry-header">
 		<div class="blog-category-list">
 		<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
