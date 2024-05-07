@@ -327,7 +327,6 @@ if ( ! class_exists( 'Blogito_Meta_For_Categories' ) ) {
 
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
-
 		}
 	}
 	new Blogito_Meta_For_Categories();

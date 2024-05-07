@@ -27,7 +27,7 @@ if ( post_password_required() ) {
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title"><span>
 		<?php
-		printf(// WPCS: XSS OK.
+		printf(
 			// translators: number of comments.
 			esc_html( _nx( '%1$s Comment', '%1$s Comments', get_comments_number(), 'comments title', 'blogito' ) ),
 			esc_html( number_format_i18n ( get_comments_number() ) )
