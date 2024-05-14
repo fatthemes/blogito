@@ -41,7 +41,7 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 
 			$posted_on = '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
 
-			echo '<span class="posted-on">' . esc_html( $posted_on ) . '</span>';
+			echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 
