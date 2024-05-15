@@ -363,7 +363,7 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 
 		$newcontent = preg_replace( '#<(?P<tag>' . $tags . ')[^<]*?(?:>[\s\S]*?<\/(?P=tag)>|\s*\/>)#', $replacement, $content, 1 );
 
-		echo esc_html( $newcontent );
+		echo $newcontent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	endif;
@@ -690,7 +690,7 @@ function blogito_the_site_branding() {
 		}
 		$output .= '</div><!-- .site-branding -->';
 	}
-	echo esc_html( $output );
+	echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 if ( ! function_exists( 'blogito_excerpt_length' ) ) :

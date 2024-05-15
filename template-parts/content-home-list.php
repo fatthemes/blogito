@@ -18,7 +18,7 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark">
 			<?php the_post_thumbnail( 'medium' ); ?>
 			</a>
-		<?php echo esc_html( blogito_post_format_icon( get_the_ID() ) ); ?>
+		<?php echo blogito_post_format_icon( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</div>
 		<div class="blogito-list-content col-xs-12 col-lg-6">
 			<header class="entry-header">
@@ -51,7 +51,7 @@
 		<div class="blogito-list-content col-xs-12">
 			<header class="entry-header">
 			<div class="title-meta-wrapper">
-			<?php echo esc_html( blogito_post_format_icon( get_the_ID() ) ); ?>
+			<?php echo blogito_post_format_icon( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<div class="blog-category-list">
 				<?php the_category( __( '<span> &#124; </span>', 'blogito' ) ); ?>
 				</div>
