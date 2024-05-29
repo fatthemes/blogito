@@ -331,7 +331,6 @@ if ( ! function_exists( 'blogito_gallery_content' ) ) :
 	 */
 	function blogito_gallery_content() {
 
-		// $content = get_the_content( sprintf( __( '<button>Read more %s</button>', 'blogito' ), the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) );
 		$content     = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
 		$pattern     = '#\[gallery[^\]]*\]#';
 		$replacement = '';
@@ -339,7 +338,7 @@ if ( ! function_exists( 'blogito_gallery_content' ) ) :
 		$newcontent = preg_replace( $pattern, $replacement, $content, 1 );
 		$newcontent = apply_filters( 'the_content', $newcontent ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$newcontent = str_replace( ']]>', ']]&gt;', $newcontent );
-		echo esc_html( $newcontent );
+		echo $newcontent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	endif;
@@ -352,7 +351,6 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 	 * @since blogito 1.0
 	 */
 	function blogito_media_content() {
-		// $content = get_the_content( sprintf( __( '<button>Read more %s</button>', 'blogito' ), the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) );
 		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
 		$content = apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$content = str_replace( ']]>', ']]&gt;', $content );
