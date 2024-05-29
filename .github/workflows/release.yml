@@ -22,15 +22,14 @@ jobs:
           VERSION=$(echo $VERSION_LINE | grep -Po "\d\d?\.\d\d?\.?\d?\d?")
           echo $VERSION
           if [ $TAG != $VERSION ]; then echo "Wrong theme/tag version - version from repo tag is $TAG but theme version from style.css is $THEMEVERSION" && exit 1 ;fi
+          echo "Checking changelog"
           grep -q "\[$VERSION\]" $PWD/CHANGELOG.md
-          grep -q "\[$VERSION\]" $PWD/CHANGELOG.md
-          # sudo apt-get update && sudo apt-get install -y zip
-          # ls -la
           npm install grunt-cli -g --force
           npm install --silent
           grunt
           rm -rf *.yml .drone.yml .g* .j* .n* .v* scss sass node_modules vendor tests Gruntfile.js casper-tests.js package.json *.ruleset.xml nbproject *.rb *.tmp *.map css/*.map slick/*.map *.log Dockerfile
           cd ..
+          ls -la
           zip -FSr ${{ github.event.repository.name }} ${{ github.event.repository.name }}
 
       - name: Upload Release Asset
