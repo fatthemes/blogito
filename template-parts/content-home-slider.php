@@ -41,7 +41,7 @@ if ( ! empty( $blogito_sticky_posts ) ) :
 					</span>
 					<h2 class="blogito-featured-slider-header"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 					</div>
-					<?php echo blogito_post_format_icon( $blogito_the_slider->ID ); // WPCS: XSS OK. ?>
+					<?php echo blogito_post_format_icon( $blogito_the_slider->ID ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<?php else : ?>
 				<div class="no-featured-image">

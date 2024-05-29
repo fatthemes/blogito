@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.6.0] - 2024-05-28
+
+### Changed
+- Tested up to 6.5.3 (WordPress version)
+
 ## [1.5.1] - 2019-07-06
 
 ### Fixed

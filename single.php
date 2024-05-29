@@ -17,7 +17,7 @@ if ( is_single() && $blogito_has_sidebar ) {
 ?>
 <?php $blogito_is_active_sidebar = ( is_active_sidebar( 'sidebar-1' ) ? '' : ' col-lg-offset-2' ); ?>
 <div class="row">
-	<div id="primary" class="content-area<?php echo ( $blogito_has_sidebar ? ' col-lg-8' . $blogito_is_active_sidebar : ' col-lg-10 col-lg-offset-1' ); // WP XSS OK. ?>">
+	<div id="primary" class="content-area<?php echo esc_html( $blogito_has_sidebar ? ' col-lg-8' . $blogito_is_active_sidebar : ' col-lg-10 col-lg-offset-1' ); ?>">
 	<main id="main" class="site-main row" role="main">
 
 		<?php

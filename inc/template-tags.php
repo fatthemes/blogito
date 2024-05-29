@@ -34,14 +34,14 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 					'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 				);
 
-				echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+				echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 
 			$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_attr( get_the_date() ) );
 
 			$posted_on = '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
 
-			echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+			echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 
@@ -62,7 +62,7 @@ if ( ! function_exists( 'blogito_entry_footer' ) ) :
 			/* translators: used between list items, there is a space after the comma */
 			$tags_list = get_the_tag_list( '', esc_html__( ', ', 'blogito' ) );
 			if ( $tags_list ) { /* translators: related tag list */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'blogito' ) . '</span>', $tags_list ); // WPCS: XSS OK.
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged: %1$s', 'blogito' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 
@@ -90,10 +90,10 @@ if ( ! function_exists( 'blogito_categorized_blog' ) ) :
 			// Create an array of all the categories that are attached to posts.
 			$all_the_cool_cats = get_categories(
 				array(
-					'fields' => 'ids',
+					'fields'     => 'ids',
 					'hide_empty' => 1,
 					// We only need to know if there is more than one category.
-					'number' => 2,
+					'number'     => 2,
 				)
 			);
 
@@ -168,10 +168,10 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 					array_merge(
 						$args,
 						array(
-							'depth' => $depth,
-							'max_depth' => $args['max_depth'],
+							'depth'      => $depth,
+							'max_depth'  => $args['max_depth'],
 							'reply_text' => 'REPLY',
-							'before' => ' &#8901; ',
+							'before'     => ' &#8901; ',
 						)
 					)
 				);
@@ -214,10 +214,10 @@ if ( ! function_exists( 'blogito_comments_fields' ) ) :
 			$args['format'] = current_theme_supports( 'html5', 'comment-form' ) ? 'html5' : 'xhtml';
 		}
 
-		$req = get_option( 'require_name_email' );
+		$req      = get_option( 'require_name_email' );
 		$aria_req = ( $req ? ' aria-required="true"' : '' );
 		$html_req = ( $req ? ' required="required"' : '' );
-		$html5 = 'html5' === $args['format'];
+		$html5    = 'html5' === $args['format'];
 
 		$fields = array(
 			'author' => '<div class="comment-fields"><p class="comment-form-author"><label for="author">' . esc_html__( 'Name', 'blogito' ) . ( $req ? ' <span class="required">*</span>' : '' ) . '</label> ' .
@@ -243,11 +243,11 @@ if ( ! function_exists( 'blogito_comments_fields' ) ) :
 	 * @return      string
 	 */
 function blogito_get_excerpt_by_id( $post_id ) {
-	$the_post = get_post( $post_id ); // Gets post ID.
-	$the_excerpt = $the_post->post_content; // Gets post_content to be used as a basis for the excerpt.
+	$the_post       = get_post( $post_id ); // Gets post ID.
+	$the_excerpt    = $the_post->post_content; // Gets post_content to be used as a basis for the excerpt.
 	$excerpt_length = 35; // Sets excerpt length by word count.
-	$the_excerpt = strip_tags( strip_shortcodes( $the_excerpt ) ); // Strips tags and images.
-	$words = explode( ' ', $the_excerpt, $excerpt_length + 1 );
+	$the_excerpt    = strip_tags( strip_shortcodes( $the_excerpt ) ); // Strips tags and images.
+	$words          = explode( ' ', $the_excerpt, $excerpt_length + 1 );
 
 	if ( count( $words ) > $excerpt_length ) :
 		array_pop( $words );
@@ -277,7 +277,7 @@ if ( ! function_exists( 'blogito_custom_popular_posts_html_list' ) ) :
 		// Loop the array of popular posts objects.
 		foreach ( $mostpopular as $popular ) {
 			$post_cat = get_the_category_list( __( '<span>&#124;</span>', 'blogito' ), '', $popular->id );
-			$thumb = get_the_post_thumbnail( $popular->id, 'medium' );
+			$thumb    = get_the_post_thumbnail( $popular->id, 'medium' );
 
 			$output .= '<li>';
 			$output .= ( ! empty( $thumb ) ) ? '<div class="fat-wpp-image"><a href="' . esc_url( get_the_permalink( $popular->id ) ) . '" title="' . esc_attr( $popular->title ) . '">' . $thumb . '</a>' : '';
@@ -331,15 +331,14 @@ if ( ! function_exists( 'blogito_gallery_content' ) ) :
 	 */
 	function blogito_gallery_content() {
 
-		// $content = get_the_content( sprintf( __( '<button>Read more %s</button>', 'blogito' ), the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) );
-		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
-		$pattern = '#\[gallery[^\]]*\]#';
+		$content     = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
+		$pattern     = '#\[gallery[^\]]*\]#';
 		$replacement = '';
 
 		$newcontent = preg_replace( $pattern, $replacement, $content, 1 );
-		$newcontent = apply_filters( 'the_content', $newcontent ); // WPCS: prefix ok.
+		$newcontent = apply_filters( 'the_content', $newcontent ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$newcontent = str_replace( ']]>', ']]&gt;', $newcontent );
-		echo $newcontent; // WPCS: XSS OK.
+		echo $newcontent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	endif;
@@ -352,9 +351,8 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 	 * @since blogito 1.0
 	 */
 	function blogito_media_content() {
-		// $content = get_the_content( sprintf( __( '<button>Read more %s</button>', 'blogito' ), the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) );
 		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
-		$content = apply_filters( 'the_content', $content ); // WPCS: prefix ok.
+		$content = apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
 		$tags = 'audio|video|object|embed|iframe';
@@ -363,32 +361,9 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 
 		$newcontent = preg_replace( '#<(?P<tag>' . $tags . ')[^<]*?(?:>[\s\S]*?<\/(?P=tag)>|\s*\/>)#', $replacement, $content, 1 );
 
-		echo $newcontent; // WPCS: XSS OK.
+		echo $newcontent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
-	endif;
-
-if ( ! function_exists( 'blogito_gallery_shortcode' ) ) :
-
-	/**
-	 * Custom gallery shortcode output.
-	 *
-	 * @param type  $output gellery shortcode output.
-	 * @param array $atts gellery shortcode atts.
-	 * @param type  $instance gellery shortcode instance.
-	 * @return type
-	 */
-	function blogito_gallery_shortcode( $output = '', $atts, $instance ) {
-		$return = $output; // Fallback.
-
-		$atts = array(
-			'size' => 'medium',
-		);
-
-		return $output;
-	}
-
-	add_filter( 'post_gallery', 'blogito_gallery_shortcode', 10, 3 );
 	endif;
 
 if ( ! function_exists( 'blogito_post_format_icon' ) ) :
@@ -410,15 +385,12 @@ if ( ! function_exists( 'blogito_post_format_icon' ) ) :
 		if ( ! $format ) {
 
 			return;
-		} else {
-
-			if ( 'audio' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M17.297 11.016h1.688q0 2.531-1.758 4.43t-4.242 2.273v3.281h-1.969v-3.281q-2.484-0.375-4.242-2.273t-1.758-4.43h1.688q0 2.203 1.57 3.633t3.727 1.43 3.727-1.43 1.57-3.633zM10.781 4.922v6.188q0 0.469 0.352 0.82t0.867 0.352q0.469 0 0.82-0.328t0.352-0.844l0.047-6.188q0-0.516-0.375-0.867t-0.844-0.352-0.844 0.352-0.375 0.867zM12 14.016q-1.219 0-2.109-0.891t-0.891-2.109v-6q0-1.219 0.891-2.109t2.109-0.891 2.109 0.891 0.891 2.109v6q0 1.219-0.891 2.109t-2.109 0.891z"></path></svg></div>';
-			} elseif ( 'video' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M9 9.984l6.984 4.031-6.984 3.984v-8.016zM21 20.016v-12h-18v12h18zM21 6q0.797 0 1.406 0.586t0.609 1.43v12q0 0.797-0.609 1.383t-1.406 0.586h-18q-0.797 0-1.406-0.586t-0.609-1.383v-12q0-0.844 0.609-1.43t1.406-0.586h7.594l-3.281-3.281 0.703-0.703 3.984 3.984 3.984-3.984 0.703 0.703-3.281 3.281h7.594z"></path></svg></div>';
-			} elseif ( 'gallery' === $format ) {
-				return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M3.984 12.984v7.031h7.031v1.969h-7.031q-0.797 0-1.383-0.586t-0.586-1.383v-7.031h1.969zM20.016 20.016v-7.031h1.969v7.031q0 0.797-0.586 1.383t-1.383 0.586h-7.031v-1.969h7.031zM20.016 2.016q0.797 0 1.383 0.586t0.586 1.383v7.031h-1.969v-7.031h-7.031v-1.969h7.031zM17.016 8.484q0 0.609-0.445 1.055t-1.055 0.445-1.055-0.445-0.445-1.055 0.445-1.055 1.055-0.445 1.055 0.445 0.445 1.055zM9.984 12.984l3 3.703 2.016-2.672 3 3.984h-12zM3.984 3.984v7.031h-1.969v-7.031q0-0.797 0.586-1.383t1.383-0.586h7.031v1.969h-7.031z"></path></svg></div>';
-			}
+		} elseif ( 'audio' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M17.297 11.016h1.688q0 2.531-1.758 4.43t-4.242 2.273v3.281h-1.969v-3.281q-2.484-0.375-4.242-2.273t-1.758-4.43h1.688q0 2.203 1.57 3.633t3.727 1.43 3.727-1.43 1.57-3.633zM10.781 4.922v6.188q0 0.469 0.352 0.82t0.867 0.352q0.469 0 0.82-0.328t0.352-0.844l0.047-6.188q0-0.516-0.375-0.867t-0.844-0.352-0.844 0.352-0.375 0.867zM12 14.016q-1.219 0-2.109-0.891t-0.891-2.109v-6q0-1.219 0.891-2.109t2.109-0.891 2.109 0.891 0.891 2.109v6q0 1.219-0.891 2.109t-2.109 0.891z"></path></svg></div>';
+		} elseif ( 'video' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M9 9.984l6.984 4.031-6.984 3.984v-8.016zM21 20.016v-12h-18v12h18zM21 6q0.797 0 1.406 0.586t0.609 1.43v12q0 0.797-0.609 1.383t-1.406 0.586h-18q-0.797 0-1.406-0.586t-0.609-1.383v-12q0-0.844 0.609-1.43t1.406-0.586h7.594l-3.281-3.281 0.703-0.703 3.984 3.984 3.984-3.984 0.703 0.703-3.281 3.281h7.594z"></path></svg></div>';
+		} elseif ( 'gallery' === $format ) {
+			return '<div class="blogito-post-format-icon"><svg viewBox="0 0 24 24"><path d="M3.984 12.984v7.031h7.031v1.969h-7.031q-0.797 0-1.383-0.586t-0.586-1.383v-7.031h1.969zM20.016 20.016v-7.031h1.969v7.031q0 0.797-0.586 1.383t-1.383 0.586h-7.031v-1.969h7.031zM20.016 2.016q0.797 0 1.383 0.586t0.586 1.383v7.031h-1.969v-7.031h-7.031v-1.969h7.031zM17.016 8.484q0 0.609-0.445 1.055t-1.055 0.445-1.055-0.445-0.445-1.055 0.445-1.055 1.055-0.445 1.055 0.445 0.445 1.055zM9.984 12.984l3 3.703 2.016-2.672 3 3.984h-12zM3.984 3.984v7.031h-1.969v-7.031q0-0.797 0.586-1.383t1.383-0.586h7.031v1.969h-7.031z"></path></svg></div>';
 		}
 	}
 
@@ -434,7 +406,7 @@ if ( ! function_exists( 'blogito_customize_css' ) ) :
 	 */
 	function blogito_customize_css() {
 		$hide_title_on_home_archive = get_theme_mod( 'hide_title_on_home_archive', 0 );
-		$hide_meta_on_home_archive = get_theme_mod( 'hide_meta_on_home_archive', 0 );
+		$hide_meta_on_home_archive  = get_theme_mod( 'hide_meta_on_home_archive', 0 );
 		?>
 		<style type="text/css">
 		<?php if ( 'front' === get_theme_mod( 'header_display', 'front' ) ) { ?>
@@ -542,8 +514,8 @@ function blogito_days() {
 	 */
 function blogito_submenu_span( $item_output, $item, $depth, $args ) {
 
-	$needle1 = 'menu-item-has-children';
-	$needle2 = 'page_item_has_children';
+	$needle1  = 'menu-item-has-children';
+	$needle2  = 'page_item_has_children';
 	$haystack = $item->classes;
 	if ( in_array( $needle1, $haystack, true ) || in_array( $needle2, $haystack, true ) ) {
 		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_attr__( 'Expand', 'blogito' ) . '">&#43;</span>';
@@ -562,7 +534,7 @@ function blogito_related_posts() {
 
 	if ( $show_related ) {
 
-		$by_cat = get_theme_mod( 'single_page_related_posts_by_tag_or_cat', 1 );
+		$by_cat   = get_theme_mod( 'single_page_related_posts_by_tag_or_cat', 1 );
 		$taxonomy = ( $by_cat ? 'category' : 'post_tag' );
 
 		if ( $by_cat ) {
@@ -576,15 +548,15 @@ function blogito_related_posts() {
 			);
 		}
 
-		$args = array(
+		$args      = array(
 			'posts_per_page' => 3,
-			'post__not_in' => array( get_the_ID() ),
-			'post_type' => 'post',
-			'tax_query' => array(
+			'post__not_in'   => array( get_the_ID() ),
+			'post_type'      => 'post',
+			'tax_query'      => array(
 				'relation' => 'OR',
 				array(
 					'taxonomy' => $taxonomy,
-					'terms' => $terms,
+					'terms'    => $terms,
 				),
 			),
 		);
@@ -621,7 +593,7 @@ function blogito_related_posts() {
 	 */
 function blogito_jetpack_sharing() {
 	if ( function_exists( 'sharing_display' ) ) {
-		$options = get_option( 'sharing-options' );
+		$options         = get_option( 'sharing-options' );
 		$display_options = $options['global']['show'];
 
 		if ( ! is_feed() ) {
@@ -666,7 +638,7 @@ function blogito_the_site_branding() {
 			}
 			$output .= '</div><!-- .site-branding -->';
 		} else {
-			$output = '<div class="site-branding">';
+			$output  = '<div class="site-branding">';
 			$output .= '<p class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" rel="home">';
 			if ( get_header_image() ) {
 				$output .= '<img src="' . get_header_image() . '" alt="' . get_bloginfo( 'name' ) . '" >';
@@ -693,7 +665,7 @@ function blogito_the_site_branding() {
 		}
 		$output .= '</div><!-- .site-branding -->';
 	}
-	echo $output; // WPCS: XSS OK.
+	echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 if ( ! function_exists( 'blogito_excerpt_length' ) ) :
