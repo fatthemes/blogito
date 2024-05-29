@@ -12,14 +12,15 @@ get_header();
 <?php if ( is_category() ) : ?>
 
 	<?php
-	$blogito_catmeta = get_term_meta( $cat );
-	$blogito_cat_bg_color = ( ! empty( $blogito_catmeta['bg_color'][0] ) ) ? '#' . $blogito_catmeta['bg_color'][0] : '';
+	$blogito_catmeta        = get_term_meta( $cat );
+	$blogito_cat_bg_color   = ( ! empty( $blogito_catmeta['bg_color'][0] ) ) ? '#' . $blogito_catmeta['bg_color'][0] : '';
 	$blogito_cat_text_color = ( ! empty( $blogito_catmeta['text_color'][0] ) ) ? '#' . $blogito_catmeta['text_color'][0] : '';
-	$blogito_catimage = ( ! empty( $blogito_catmeta['image'][0] ) ) ? $blogito_catmeta['image'][0] : '';
-	$blogito_catimgsrc = wp_get_attachment_image_src( $blogito_catimage, 'full' );
+	$blogito_catimage       = ( ! empty( $blogito_catmeta['image'][0] ) ) ? $blogito_catmeta['image'][0] : '';
+	$blogito_catimgsrc      = wp_get_attachment_image_src( $blogito_catimage, 'full' );
+	$blogito_catimgsrc_url  = ! empty( $blogito_catimgsrc[0] ) ? $blogito_catimgsrc[0] : '';
 	?>
 	<div class="row archive-blogito-page-intro-row">
-		<div class="blogito-page-intro col-xs-12" style="<?php echo 'background:' . esc_attr( $blogito_cat_bg_color ) . ' url(' . esc_url( $blogito_catimgsrc[0] ) . ') no-repeat center;color:' . esc_attr( $blogito_cat_text_color ) . ';'; ?>background-size:cover;">
+		<div class="blogito-page-intro col-xs-12" style="<?php echo 'background:' . esc_attr( $blogito_cat_bg_color ) . ' url(' . esc_url( $blogito_catimgsrc_url ) . ') no-repeat center;color:' . esc_attr( $blogito_cat_text_color ) . ';'; ?>background-size:cover;">
 		<h1><?php echo esc_html( single_cat_title( '', false ) ); ?></h1>
 		<div class="row">
 		<?php the_archive_description( '<div class="taxonomy-description col-md-8 col-md-offset-2">', '</div>' ); ?>
@@ -37,7 +38,7 @@ get_header();
 		echo ' col-lg-push-2';
 	endif;
 	?>
-	 ">
+	">
 			<?php if ( ! is_category() ) : ?>
 		<div class="blogito-page-intro">
 			<h1><?php the_archive_title(); ?></h1>
