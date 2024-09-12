@@ -1,5 +1,10 @@
 # Changes to Blogito
 
+## [1.6.1] - 2024-09-12
+ - Added Block Editor support
+ - Fixed default style for block buttons
+ - Tested up to 6.6.2 (WordPress version)
+
 ## [1.6.0] - 2024-05-28
 
 ### Changed
