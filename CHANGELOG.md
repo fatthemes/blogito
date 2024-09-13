@@ -1,4 +1,7 @@
 # Changes to Blogito
+## [1.6.2] - 2024-09-13
+- Removed `theme.json` to resolve conflicts with block editor styles.
+- Tested up to WordPress version 6.6.2.
 
 ## [1.6.1] - 2024-09-12
  - Added Block Editor support
