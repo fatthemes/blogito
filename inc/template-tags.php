@@ -154,7 +154,7 @@ if ( ! function_exists( 'blogito_comment' ) ) :
 				</div>
 			<?php endif; ?>
 			<div class="comment-meta commentmetadata">
-				<?php printf( sprintf( '<cite class="fn"><b>%s</b></cite>', get_comment_author_link() ) ); ?>
+				<?php printf( '<cite class="fn"><b>%s</b></cite>', wp_kses_post( get_comment_author_link() ) ); ?>
 				<br />
 				<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
 					<?php
@@ -316,7 +316,7 @@ if ( ! function_exists( 'blogito_content' ) ) :
 			the_excerpt();
 		} else {
 			// Translators: page/post title.
-			the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
+			the_content( sprintf( '<button>%1$s%2$s</button>', esc_html__( 'Read more', 'blogito' ), wp_kses_post( the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) ) );
 		}
 	}
 
@@ -331,7 +331,7 @@ if ( ! function_exists( 'blogito_gallery_content' ) ) :
 	 */
 	function blogito_gallery_content() {
 
-		$content     = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
+		$content     = get_the_content( sprintf( '<button>%1$s%2$s</button>', esc_html__( 'Read more', 'blogito' ), wp_kses_post( the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) ) );
 		$pattern     = '#\[gallery[^\]]*\]#';
 		$replacement = '';
 
@@ -351,7 +351,7 @@ if ( ! function_exists( 'blogito_media_content' ) ) :
 	 * @since blogito 1.0
 	 */
 	function blogito_media_content() {
-		$content = get_the_content( sprintf( '<button>%s' . the_title( '<span class="screen-reader-text">"', '"</span>', false ) . '</button>', esc_html__( 'Read more', 'blogito' ) ) );
+		$content = get_the_content( sprintf( '<button>%1$s%2$s</button>', esc_html__( 'Read more', 'blogito' ), wp_kses_post( the_title( '<span class="screen-reader-text">"', '"</span>', false ) ) ) );
 		$content = apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
