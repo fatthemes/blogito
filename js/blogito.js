@@ -24,7 +24,8 @@
 		autoplay: Boolean(blogito.home_page_slider_autoplay),
 		autoplaySpeed: Number(blogito.home_page_slider_play_speed),
 		speed: 1000,
-		slidesToShow: Number(blogito.home_page_slider_img_number),
+		// Never show more slides than there are sticky posts.
+		slidesToShow: Math.min( Number(blogito.home_page_slider_img_number), $( '.blogito-featured-slider' ).children().length ),
 		slidesToScroll: 1,
 		//centerMode: true,
 		//centerPadding: '50px',

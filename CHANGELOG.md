@@ -1,4 +1,10 @@
 # Changes to Blogito
+## [Unreleased]
+- Fixed a crash when a post title or commenter name contains a "%" sign
+- Fixed the featured slider showing a blank area with one sticky post
+- Fixed the empty "Read more" button in the list layout
+- Fixed category colours and images not showing on category pages
+
 ## [1.6.2] - 2024-09-13
 - Removed `theme.json` to resolve conflicts with block editor styles.
 

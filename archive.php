@@ -12,7 +12,7 @@ get_header();
 <?php if ( is_category() ) : ?>
 
 	<?php
-	$blogito_catmeta        = get_term_meta( $cat );
+	$blogito_catmeta        = get_term_meta( get_queried_object_id() );
 	$blogito_cat_bg_color   = ( ! empty( $blogito_catmeta['bg_color'][0] ) ) ? '#' . $blogito_catmeta['bg_color'][0] : '';
 	$blogito_cat_text_color = ( ! empty( $blogito_catmeta['text_color'][0] ) ) ? '#' . $blogito_catmeta['text_color'][0] : '';
 	$blogito_catimage       = ( ! empty( $blogito_catmeta['image'][0] ) ) ? $blogito_catmeta['image'][0] : '';

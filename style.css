@@ -3189,7 +3189,7 @@ p.has-drop-cap:not(:focus)::first-letter {
   right: 0; }
 
 /* Dots */
-.slick-slider {
+.slick-slider:not(.slick-initialized) {
   background: url("./slick/ajax-loader.gif") center center no-repeat; }
 
 .slick-dots {
@@ -3266,7 +3266,7 @@ p.has-drop-cap:not(:focus)::first-letter {
   .featured-posts a:hover {
     color: #fff; }
 
-.blogito-featured-slider {
+.blogito-featured-slider:not(.slick-initialized) {
   background: url("./slick/ajax-loader.gif") center center no-repeat; }
 
 .blogito-featured-slider-wrapper {
