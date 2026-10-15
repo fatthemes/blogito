@@ -47,19 +47,21 @@
 			<?php
 			wp_nav_menu(
 				array(
-					'theme_location' => 'social',
-					'menu_id' => 'social-menu',
+					'theme_location'  => 'social',
+					'menu_id'         => 'social-menu',
 					'container_class' => 'social-menu-container',
 					'depth'           => 1,
 					'link_before'     => '<span class="screen-reader-text">',
 					'link_after'      => '</span>',
+					'fallback_cb'     => false,
 				)
 			);
 			wp_nav_menu(
 				array(
-					'theme_location' => 'top',
-					'menu_id' => 'top-menu',
+					'theme_location'  => 'top',
+					'menu_id'         => 'top-menu',
 					'container_class' => 'top-menu-container',
+					'fallback_cb'     => 'blogito_top_menu_fallback',
 				)
 			);
 			?>

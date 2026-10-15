@@ -170,7 +170,7 @@ function blogito_customize_register( $wp_customize ) {
 				'masonry' => esc_html__( 'Masonry + Sidebar', 'blogito' ),
 				'list' => esc_html__( 'List + Sidebar', 'blogito' ),
 				'' => esc_html__( 'Masonry (No Sidebar)', 'blogito' ),
-				'classic' => esc_html__( 'Classic (One Column)', 'blogito' ),
+				'classic' => esc_html__( 'Classic (One Column + Sidebar)', 'blogito' ),
 			),
 		)
 	);

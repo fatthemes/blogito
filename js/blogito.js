@@ -153,6 +153,16 @@
 	    $blogitoSearchToggle.attr( 'aria-expanded', 'false' );
 	} );
 
+	// Open a dropdown leftwards when it would run past the right edge of the window.
+	$( '#top-navigation' ).on( 'mouseenter focusin', 'li', function () {
+	    var $submenu = $( this ).children( 'ul' );
+	    if ( $submenu.length ) {
+		var rect = this.getBoundingClientRect();
+		var start = $( this ).parent().closest( 'ul ul' ).length ? rect.right : rect.left;
+		$( this ).toggleClass( 'blogito-submenu-flip', start + $submenu.outerWidth() > document.documentElement.clientWidth );
+	    }
+	} );
+
 
 //Sticky menu
 	var $blogitoSiteNavigation = $( '#top-navigation' );
@@ -260,7 +270,10 @@
 	    } );
 	}
 
-	if ( blogito.pagination === 'infinite' ) {
+	// Below the 62em grid breakpoint the sidebar stacks under the posts, so infinite scroll would keep pushing it away.
+	var blogitoPagination = ( blogito.pagination === 'infinite' && ! window.matchMedia( '(min-width: 62em)' ).matches ) ? 'ajax' : blogito.pagination;
+
+	if ( blogitoPagination === 'infinite' ) {
 	    if ( typeof $.infinitescroll === 'function' ) {
 
 		$blogitoContainer.infinitescroll( {
@@ -299,7 +312,7 @@
 	    }
 	}
 
-	if ( blogito.pagination === 'ajax' ) {
+	if ( blogitoPagination === 'ajax' ) {
 	    // The number of the next page to load (/page/x/).
 	    var pageNum = parseInt( blogito.startPage, 10 ) + 1;
 

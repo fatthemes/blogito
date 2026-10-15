@@ -37,12 +37,13 @@
 		);
 		wp_nav_menu(
 			array(
-				'theme_location' => 'social',
-				'menu_id' => 'social-menu',
+				'theme_location'  => 'social',
+				'menu_id'         => 'left-social-menu',
 				'container_class' => 'social-menu-container',
 				'depth'           => 1,
 				'link_before'     => '<span class="screen-reader-text">',
 				'link_after'      => '</span>',
+				'fallback_cb'     => false,
 			)
 		);
 		?>
