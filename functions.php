@@ -108,61 +108,61 @@ add_action( 'after_setup_theme', 'blogito_content_width', 0 );
 function blogito_widgets_init() {
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Right Sidebar', 'blogito' ),
-			'id' => 'sidebar-1',
-			'description' => esc_html__( 'Right Sidebar Widget Area', 'blogito' ),
+			'name'          => esc_html__( 'Right Sidebar', 'blogito' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Appears beside the content on posts, pages and blog pages when the layout includes a sidebar.', 'blogito' ),
 			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h2 class="widget-title"><span>',
-			'after_title' => '</span></h2>',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h2 class="widget-title"><span>',
+			'after_title'   => '</span></h2>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Left Sidebar', 'blogito' ),
-			'id' => 'sidebar-2',
-			'description' => esc_html__( 'Right Sidebar Widget Area', 'blogito' ),
+			'name'          => esc_html__( 'Left Sidebar', 'blogito' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Appears in the slide-out panel opened by the menu icon.', 'blogito' ),
 			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h2 class="widget-title"><span>',
-			'after_title' => '</span></h2>',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h2 class="widget-title"><span>',
+			'after_title'   => '</span></h2>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Top', 'blogito' ),
-			'id' => 'top-1',
-			'description' => esc_html__( 'Top Widget Area. Above the content - on home and archive pages', 'blogito' ),
+			'name'          => esc_html__( 'Top', 'blogito' ),
+			'id'            => 'top-1',
+			'description'   => esc_html__( 'Appears above the posts on the blog home page and archive pages.', 'blogito' ),
 			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h2 class="widget-title"><span>',
-			'after_title' => '</span></h2>',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h2 class="widget-title"><span>',
+			'after_title'   => '</span></h2>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Bottom (Instagram Feed)', 'blogito' ),
-			'id' => 'bottom-1',
-			'description' => esc_html__( 'Instagram Widget Area. Below the content.', 'blogito' ),
+			'name'          => esc_html__( 'Bottom (Instagram Feed)', 'blogito' ),
+			'id'            => 'bottom-1',
+			'description'   => esc_html__( 'Appears on every page, just above the footer.', 'blogito' ),
 			'before_widget' => '<aside id="%1$s" class="widget col-xs-12 %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h2 class="widget-title"><span>',
-			'after_title' => '</span></h2>',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h2 class="widget-title"><span>',
+			'after_title'   => '</span></h2>',
 		)
 	);
 
 	register_sidebar(
 		array(
-			'name' => esc_html__( 'Social Menu', 'blogito' ),
-			'id' => 'menu-social-1',
-			'description' => esc_html__( 'Menu Social Widget Area.', 'blogito' ),
+			'name'          => esc_html__( 'Social Menu', 'blogito' ),
+			'id'            => 'menu-social-1',
+			'description'   => esc_html__( 'Not displayed by this theme. Use the Social Menu location under Appearance, Menus instead.', 'blogito' ),
 			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h2 class="widget-title"><span>',
-			'after_title' => '</span></h2>',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h2 class="widget-title"><span>',
+			'after_title'   => '</span></h2>',
 		)
 	);
 }
@@ -247,6 +247,11 @@ add_action( 'wp_enqueue_scripts', 'blogito_scripts' );
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Page walker for the Top menu fallback.
+ */
+require get_template_directory() . '/inc/class-blogito-walker-menu-fallback.php';
 
 /**
  * Hybrid Media Grabber for getting media from posts.

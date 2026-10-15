@@ -4,6 +4,12 @@
 - Fixed the featured slider showing a blank area with one sticky post
 - Fixed the empty "Read more" button in the list layout
 - Fixed category colours and images not showing on category pages
+- Fixed the header listing every page when no menu is assigned
+- Fixed hidden social links appearing when no Social menu is assigned
+- Clarified where each widget area appears
+- Fixed the sidebar being unreachable on mobile with infinite scroll
+- Renamed the Classic layout option to show it includes a sidebar
+- Fixed dropdown menus running off the right edge of the screen
 
 ## [1.6.2] - 2024-09-13
 - Removed `theme.json` to resolve conflicts with block editor styles.
