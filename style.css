@@ -1811,7 +1811,12 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
     font-size: 1.25rem;
     padding: 1.5675rem .625rem 1.5675rem 0;
     display: block;
-    float: right; }
+    float: right;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    letter-spacing: inherit;
+    transition: none; }
 
 .blogito-search-panel {
   display: none;
@@ -2015,7 +2020,7 @@ h1 a, .site-title a, h2 a, h3 a, h4 a, h5 a, h6 a, .navigation a, .main-navigati
   font-weight: 700;
   font-size: .75em;
   letter-spacing: .05em;
-  color: #999; }
+  color: #767676; }
 
 .blogito-next-article-title, .blogito-previous-article-title {
   font-weight: 700;
@@ -3771,5 +3776,32 @@ img.mfp-img {
 
 .widgets-list-layout .widgets-list-layout-blavatar {
   max-width: 80px; }
+
+/*--------------------------------------------------------------
+# Focus
+--------------------------------------------------------------*/
+/* Last in the file so it wins over the outline resets above; the two-tone ring shows on light and dark backgrounds. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff; }
+
+/* Slick arrows are white over dark slides, so the ring colours swap. */
+.slick-arrow:focus-visible {
+  outline-color: #fff;
+  box-shadow: 0 0 0 2px #000; }
+
+/* Slick clips anything outside a slide, so its ring is drawn inside; featured slides are always dark. */
+.slick-slide[tabindex]:focus-visible {
+  outline-offset: -4px;
+  box-shadow: none; }
+
+.blogito-featured-slider .slick-slide[tabindex]:focus-visible {
+  outline-color: #fff; }
 
 /*# sourceMappingURL=style.css.map */

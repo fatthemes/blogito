@@ -10,6 +10,9 @@
 - Fixed the sidebar being unreachable on mobile with infinite scroll
 - Renamed the Classic layout option to show it includes a sidebar
 - Fixed dropdown menus running off the right edge of the screen
+- Improved keyboard navigation for menus, the side panel and search
+- Side panel and search now close with the Escape key
+- Improved colour contrast for buttons and post navigation labels
 
 ## [1.6.2] - 2024-09-13
 - Removed `theme.json` to resolve conflicts with block editor styles.

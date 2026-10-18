@@ -101,8 +101,8 @@ function blogito_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'button_color',
 		array(
-			'type' => 'theme_mod',
-			'default' => '#a0946b',
+			'type'              => 'theme_mod',
+			'default'           => '#7d7250',
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
