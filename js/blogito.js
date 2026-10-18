@@ -4,10 +4,6 @@
 
     $( document ).ready( function ( $ ) {
 
-	$( 'a' ).on( 'click', function () {
-	    $( this ).blur();
-	} );
-
 	var $blogitoSecondary = $( '#secondary' );
 
 	if ( typeof $.fn.theiaStickySidebar === 'function' ) {
@@ -144,14 +140,23 @@
 	var $blogitoSearchPanel = $( '.blogito-search-panel' );
 	var $blogitoSearchToggle = $( '.search-toggle' );
 
-	$blogitoSearchToggle.on( 'click', function () {
-	    $blogitoSearchPanel.slideToggle( 250 ).css( 'z-index', '1001' );
-	    $( this ).attr( 'aria-expanded', 'true' );
-	} );
-	$( '.blogito-search-panel-close' ).on( 'click', function () {
-	    $blogitoSearchPanel.slideToggle( 250 ).css( 'z-index', '' );
-	    $blogitoSearchToggle.attr( 'aria-expanded', 'false' );
-	} );
+	var blogitoSearchPanelToggle = function () {
+	    var open = $blogitoSearchToggle.attr( 'aria-expanded' ) !== 'true';
+
+	    $blogitoSearchToggle.attr( 'aria-expanded', String( open ) );
+	    $blogitoSearchPanel.slideToggle( 250 ).css( 'z-index', open ? '1001' : '' );
+
+	    if ( open ) {
+		$blogitoSearchPanel.promise().done( function () {
+		    $blogitoSearchPanel.find( '.search-field' ).trigger( 'focus' );
+		} );
+	    } else {
+		$blogitoSearchToggle.trigger( 'focus' );
+	    }
+	};
+
+	$blogitoSearchToggle.on( 'click', blogitoSearchPanelToggle );
+	$( '.blogito-search-panel-close' ).on( 'click', blogitoSearchPanelToggle );
 
 	// Open a dropdown leftwards when it would run past the right edge of the window.
 	$( '#top-navigation' ).on( 'mouseenter focusin', 'li', function () {
@@ -161,6 +166,20 @@
 		var start = $( this ).parent().closest( 'ul ul' ).length ? rect.right : rect.left;
 		$( this ).toggleClass( 'blogito-submenu-flip', start + $submenu.outerWidth() > document.documentElement.clientWidth );
 	    }
+	} );
+
+	// Whether focus came from the keyboard; browsers without :focus-visible count all focus.
+	var blogitoFocusVisible = function ( el ) {
+	    try {
+		return el.matches( ':focus-visible' );
+	    } catch ( err ) {
+		return true;
+	    }
+	};
+
+	// Hold a dropdown open while keyboard focus is inside its item (style.css expects .focus).
+	$( '#top-navigation' ).on( 'focusin focusout', 'li', function ( e ) {
+	    $( this ).toggleClass( 'focus', e.type === 'focusin' && blogitoFocusVisible( e.target ) );
 	} );
 
 
@@ -212,19 +231,66 @@
 	    blogitoMenuToggle();
 	} );
 
-	var blogitoMenuToggle = function () {
+	// Visible, enabled elements inside a panel that can take keyboard focus.
+	var blogitoFocusable = function ( $panel ) {
+	    return $panel.find( 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])' ).filter( ':visible:not(:disabled)' );
+	};
 
-	    if ( menu.is( ':visible' ) ) {
-		//$('#page').animate({'margin-left': '', 'overflow-x': '' }, 300, 'linear');
-		button.attr( 'aria-expanded', 'false' );
-	    } else {
-		//$('#page').animate({'margin-left': '320px', 'overflow-x': 'hidden' }, 300, 'linear');
-		button.attr( 'aria-expanded', 'true' );
-	    }
+	var blogitoMenuToggle = function () {
+	    // aria-expanded is the state, so clicks during the slide animation stay in sync.
+	    var open = button.attr( 'aria-expanded' ) !== 'true';
+
+	    button.attr( 'aria-expanded', String( open ) );
 	    menu.toggle( 'slide', { direction: 'left' }, 500, 'linear' );
 	    //bgmenu.toggle();
 	    bgmenu.fadeToggle( 500 );
+
+	    if ( open ) {
+		menu.promise().done( function () {
+		    blogitoFocusable( menu ).first().trigger( 'focus' );
+		} );
+	    } else {
+		button.trigger( 'focus' );
+	    }
 	};
+
+	// Escape closes the open panel; Tab and Shift+Tab stay inside it.
+	$( document ).on( 'keydown', function ( e ) {
+	    var $panel, $items, first, last;
+
+	    if ( button.attr( 'aria-expanded' ) === 'true' ) {
+		$panel = menu;
+	    } else if ( $blogitoSearchToggle.attr( 'aria-expanded' ) === 'true' ) {
+		$panel = $blogitoSearchPanel;
+	    } else {
+		return;
+	    }
+
+	    if ( e.key === 'Escape' || e.keyCode === 27 ) {
+		if ( $panel === menu ) {
+		    blogitoMenuToggle();
+		} else {
+		    blogitoSearchPanelToggle();
+		}
+	    } else if ( e.key === 'Tab' || e.keyCode === 9 ) {
+		$items = blogitoFocusable( $panel );
+		first = $items.get( 0 );
+		last = $items.get( -1 );
+
+		if ( ! first ) {
+		    e.preventDefault();
+		} else if ( ! $.contains( $panel[0], document.activeElement ) ) {
+		    e.preventDefault();
+		    first.focus();
+		} else if ( e.shiftKey && document.activeElement === first ) {
+		    e.preventDefault();
+		    last.focus();
+		} else if ( ! e.shiftKey && document.activeElement === last ) {
+		    e.preventDefault();
+		    first.focus();
+		}
+	    }
+	} );
 
 	var $blogitoMenuPlusLeft = $( '#site-navigation .expand-submenu' );
 
@@ -232,11 +298,11 @@
 
 	    if ( $( this ).hasClass( 'submenu-expanded' ) ) {
 
-		$( this ).css( { 'transform': 'none' } ).removeClass( 'submenu-expanded' ).prop( 'title', blogito.expandText );
+		$( this ).css( { 'transform': 'none' } ).removeClass( 'submenu-expanded' ).attr( { 'aria-expanded': 'false', 'aria-label': blogito.expandText, 'title': blogito.expandText } );
 		//$(this).parent().children('ul').hide();
 		$( this ).parent().children( 'ul' ).slideToggle();
 	    } else {
-		$( this ).css( { 'transform': 'rotate(45deg)' } ).addClass( 'submenu-expanded' ).prop( 'title', blogito.closeText );
+		$( this ).css( { 'transform': 'rotate(45deg)' } ).addClass( 'submenu-expanded' ).attr( { 'aria-expanded': 'true', 'aria-label': blogito.closeText, 'title': blogito.closeText } );
 		//$(this).parent().children('ul').show();
 		$( this ).parent().children( 'ul' ).slideToggle();
 	    }

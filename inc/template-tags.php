@@ -429,18 +429,18 @@ if ( ! function_exists( 'blogito_customize_css' ) ) :
 			.blog .content-area .entry-meta, .archive .content-area .entry-meta, .search .content-area .entry-meta {display:none;}
 			.blog .masonry .entry-content, .archive .masonry .entry-content, .search .masonry .entry-content {padding-bottom: 2rem;}
 	<?php endif; ?>
-		svg:hover,a svg:hover,.blogito-author-social-icons a:hover svg {fill: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
-		button,input[type="button"],input[type="reset"],input[type="submit"],.navbar-navigation .current_page_item > a:after,.navbar-navigation .current-menu-item > a:after,.navbar-navigation .current_page_ancestor > a:after,.navbar-navigation .current-menu-ancestor > a:after {border: 1px solid <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
+		svg:hover,a svg:hover,.blogito-author-social-icons a:hover svg {fill: <?php echo esc_attr( get_theme_mod( 'button_color', '#7d7250' ) ); ?>;}
+		button,input[type="button"],input[type="reset"],input[type="submit"],.navbar-navigation .current_page_item > a:after,.navbar-navigation .current-menu-item > a:after,.navbar-navigation .current_page_ancestor > a:after,.navbar-navigation .current-menu-ancestor > a:after {border: 1px solid <?php echo esc_attr( get_theme_mod( 'button_color', '#7d7250' ) ); ?>;}
 		button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a:hover,a:focus,a:active,.navbar-navigation a:hover,.main-navigation ul .current_page_item > a,
-		.main-navigation ul .current-menu-item > a,.main-navigation ul .current_page_ancestor > a,.main-navigation ul .current-menu-ancestor > a,.main-navigation ul .current_page_item > .expand-submenu,.main-navigation ul .current-menu-item > .expand-submenu,.main-navigation ul .current_page_ancestor > .expand-submenu,.main-navigation ul .current-menu-ancestor > .expand-submenu,.widget_nav_menu ul .current_page_item > a,.widget_nav_menu ul .current-menu-item > a,.widget_nav_menu ul .current_page_ancestor > a,.widget_nav_menu ul .current-menu-ancestor > a,.widget_nav_menu ul .current_page_item > .expand-submenu,.widget_nav_menu ul .current-menu-item > .expand-submenu,.widget_nav_menu ul .current_page_ancestor > .expand-submenu,.widget_nav_menu ul .current-menu-ancestor > .expand-submenu,.nav-links a:hover > .blogito-next-article-title,.nav-links a:hover > .blogito-previous-article-title,.nav-links a:hover > .blogito-next-article,.nav-links a:hover > .blogito-previous-article,.main-navigation .expand-submenu:hover,.widget_nav_menu .expand-submenu:hover,.main-navigation a:hover,.widget_nav_menu a:hover,.nav-social a:hover svg,.left-nav-social a:hover svg {color: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
+		.main-navigation ul .current-menu-item > a,.main-navigation ul .current_page_ancestor > a,.main-navigation ul .current-menu-ancestor > a,.main-navigation ul .current_page_item > .expand-submenu,.main-navigation ul .current-menu-item > .expand-submenu,.main-navigation ul .current_page_ancestor > .expand-submenu,.main-navigation ul .current-menu-ancestor > .expand-submenu,.widget_nav_menu ul .current_page_item > a,.widget_nav_menu ul .current-menu-item > a,.widget_nav_menu ul .current_page_ancestor > a,.widget_nav_menu ul .current-menu-ancestor > a,.widget_nav_menu ul .current_page_item > .expand-submenu,.widget_nav_menu ul .current-menu-item > .expand-submenu,.widget_nav_menu ul .current_page_ancestor > .expand-submenu,.widget_nav_menu ul .current-menu-ancestor > .expand-submenu,.nav-links a:hover > .blogito-next-article-title,.nav-links a:hover > .blogito-previous-article-title,.nav-links a:hover > .blogito-next-article,.nav-links a:hover > .blogito-previous-article,.main-navigation .expand-submenu:hover,.widget_nav_menu .expand-submenu:hover,.main-navigation a:hover,.widget_nav_menu a:hover,.nav-social a:hover svg,.left-nav-social a:hover svg {color: <?php echo esc_attr( get_theme_mod( 'button_color', '#7d7250' ) ); ?>;}
 		.blogito-search-panel .blogito-search-panel-close:hover,
 		.menu-toggle:hover,
 		.search-toggle:hover,
 		button,
 		input[type="button"],
 		input[type="reset"],
-		input[type="submit"] {background-color: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
-		.left-sidebar-close:hover svg line {stroke: <?php echo esc_attr( get_theme_mod( 'button_color', '#a0946b' ) ); ?>;}
+		input[type="submit"] {background-color: <?php echo esc_attr( get_theme_mod( 'button_color', '#7d7250' ) ); ?>;}
+		.left-sidebar-close:hover svg line {stroke: <?php echo esc_attr( get_theme_mod( 'button_color', '#7d7250' ) ); ?>;}
 		@media screen and (min-width: <?php echo absint( get_theme_mod( 'show_top_menu_width', 978 ) ); ?>px )  {
 			.menu-logo {float:left;}
 			.navbar-navigation ul, .nav-social {display:block;}
@@ -518,13 +518,24 @@ function blogito_submenu_span( $item_output, $item, $depth, $args ) {
 	$needle2  = 'page_item_has_children';
 	$haystack = $item->classes;
 	if ( in_array( $needle1, $haystack, true ) || in_array( $needle2, $haystack, true ) ) {
-		$item_output = $item_output . '<span class="expand-submenu" title="' . esc_attr__( 'Expand', 'blogito' ) . '">&#43;</span>';
+		$item_output = $item_output . blogito_get_submenu_toggle();
 	}
 
 	return $item_output;
 }
 
 	add_filter( 'walker_nav_menu_start_el', 'blogito_submenu_span', 10, 4 );
+
+/**
+ * Returns the button that expands a side menu submenu.
+ *
+ * @return string
+ */
+function blogito_get_submenu_toggle() {
+	$label = __( 'Expand submenu', 'blogito' );
+
+	return '<button type="button" class="expand-submenu" aria-expanded="false" aria-label="' . esc_attr( $label ) . '" title="' . esc_attr( $label ) . '">&#43;</button>';
+}
 
 	/**
 	 * Function for displaying related posts on single post.
