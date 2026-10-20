@@ -35,6 +35,8 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 				);
 
 				echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+				blogito_reading_time();
 		} else {
 
 			$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_attr( get_the_date() ) );
@@ -46,6 +48,24 @@ if ( ! function_exists( 'blogito_posted_on' ) ) :
 	}
 
 endif;
+
+/**
+ * Prints the estimated reading time of the current post when the option is on.
+ */
+function blogito_reading_time() {
+	if ( ! get_theme_mod( 'blogito_reading_time', 0 ) ) {
+		return;
+	}
+
+	$blogito_text    = trim( wp_strip_all_tags( strip_shortcodes( get_post_field( 'post_content', get_the_ID() ) ) ) );
+	$blogito_words   = count( preg_split( '/\s+/u', $blogito_text, -1, PREG_SPLIT_NO_EMPTY ) );
+	$blogito_minutes = max( 1, (int) ceil( $blogito_words / 200 ) );
+
+	/* translators: %s: number of minutes */
+	$blogito_label = sprintf( _n( '%s min read', '%s min read', $blogito_minutes, 'blogito' ), number_format_i18n( $blogito_minutes ) );
+
+	echo '<span class="blogito-reading-time"><span aria-hidden="true"> &middot; </span>' . esc_html( $blogito_label ) . '</span>';
+}
 
 if ( ! function_exists( 'blogito_entry_footer' ) ) :
 
@@ -597,6 +617,36 @@ function blogito_related_posts() {
 			<?php
 		endif;
 	}// End if().
+}
+
+/**
+ * Prints the author box after a single post when the option is on and the author has a bio.
+ */
+function blogito_author_box() {
+	$blogito_bio = get_the_author_meta( 'description' );
+
+	if ( ! get_theme_mod( 'blogito_author_box', 0 ) || ! is_single() || '' === trim( $blogito_bio ) ) {
+		return;
+	}
+
+	$blogito_author_id = get_the_author_meta( 'ID' );
+	?>
+	<section class="blogito-author-box col-xs-12">
+		<div class="blogito-author-box-inner">
+			<?php echo get_avatar( $blogito_author_id, 80 ); ?>
+			<div class="blogito-author-box-text">
+				<h2 class="blogito-author-box-name"><?php echo esc_html( get_the_author() ); ?></h2>
+				<div class="blogito-author-box-bio"><?php echo wp_kses_post( wpautop( $blogito_bio ) ); ?></div>
+				<a class="blogito-author-box-link" href="<?php echo esc_url( get_author_posts_url( $blogito_author_id ) ); ?>">
+					<?php
+					/* translators: %s: author name */
+					printf( esc_html__( 'View all posts by %s', 'blogito' ), esc_html( get_the_author() ) );
+					?>
+				</a>
+			</div>
+		</div>
+	</section>
+	<?php
 }
 
 	/**

@@ -1,0 +1,9 @@
+/* Block editor styles for the Wide and full width blocks option. */
+
+.wp-block[data-align="wide"] {
+	max-width: 1140px;
+}
+
+.wp-block[data-align="full"] {
+	max-width: none;
+}

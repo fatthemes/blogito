@@ -27,7 +27,10 @@ if ( is_single() && $blogito_has_sidebar ) {
 
 			<?php get_template_part( 'template-parts/content-single', get_post_format() ); ?>
 
-			<?php blogito_related_posts(); ?>
+			<?php
+			blogito_author_box();
+			blogito_related_posts();
+			?>
 
 			<?php
 			if ( get_theme_mod( 'single_post_navigation', 1 ) ) :

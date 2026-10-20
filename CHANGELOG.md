@@ -13,6 +13,10 @@
 - Improved keyboard navigation for menus, the side panel and search
 - Side panel and search now close with the Escape key
 - Improved colour contrast for buttons and post navigation labels
+- Added reading typography, reading time, author box, back-to-top button, reading progress bar and card hover options (Customizer → Reading & Extras)
+- Added block editor styles and wide/full alignment support
+- Added an option to turn off the header hiding on scroll
+- New features are off by default on existing sites
 
 ## [1.6.2] - 2024-09-13
 - Removed `theme.json` to resolve conflicts with block editor styles.
