@@ -1,0 +1,18 @@
+/* Block editor styles for the Reading typography option. */
+
+body {
+	font-size: 17px;
+	line-height: 1.7;
+}
+
+p.wp-block,
+ul.wp-block,
+ol.wp-block,
+h2.wp-block,
+h3.wp-block,
+h4.wp-block,
+h5.wp-block,
+h6.wp-block,
+.wp-block-quote.wp-block {
+	max-width: 68ch;
+}

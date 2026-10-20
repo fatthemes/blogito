@@ -187,8 +187,14 @@
 	var $blogitoSiteNavigation = $( '#top-navigation' );
 
 	var lastScrollTop = 0; //, delta = 5;
+	var blogitoHeaderStatic = $( 'body' ).hasClass( 'blogito-header-static' );
 
 	$( window ).scroll( function () {
+
+	    // Customizer option to keep the header in view.
+	    if ( blogitoHeaderStatic ) {
+		return;
+	    }
 
 	    var st = $( this ).scrollTop();
 

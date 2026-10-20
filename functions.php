@@ -82,6 +82,21 @@ if ( ! function_exists( 'blogito_setup' ) ) :
 
 		// Enable support for Site Logo.
 		add_theme_support( 'custom-logo' );
+
+		// Make the block editor match the front end.
+		add_theme_support( 'editor-styles' );
+		add_editor_style( 'editor-style.css' );
+
+		if ( get_theme_mod( 'blogito_reading_typography', 0 ) ) {
+			add_editor_style( 'editor-style-reading.css' );
+		}
+
+		// Only with the option on, as responsive-embeds changes how existing embeds render.
+		if ( get_theme_mod( 'blogito_wide_align', 0 ) ) {
+			add_theme_support( 'align-wide' );
+			add_theme_support( 'responsive-embeds' );
+			add_editor_style( 'editor-style-wide.css' );
+		}
 	}
 
 endif; // End of blogito_setup.
@@ -203,6 +218,10 @@ function blogito_scripts() {
 	wp_enqueue_script( 'blogito-scripts', get_template_directory_uri() . '/js/blogito.min.js', array( 'jquery', 'jquery-effects-core', 'jquery-effects-slide' ), '20160908', true );
 
 	wp_enqueue_script( 'blogito-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.min.js', array(), '20130115', true );
+
+	if ( get_theme_mod( 'blogito_back_to_top', 0 ) || ( get_theme_mod( 'blogito_progress_bar', 0 ) && is_single() ) ) {
+		wp_enqueue_script( 'blogito-extras', get_template_directory_uri() . '/js/blogito-extras.js', array(), '20261019', true );
+	}
 
 	// Preparing to pass variables to js -> load more posts via ajax call.
 	global $wp_query;

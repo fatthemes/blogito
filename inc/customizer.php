@@ -698,6 +698,72 @@ function blogito_customize_register( $wp_customize ) {
 			'type' => 'checkbox',
 		)
 	);
+
+	// Section Reading & Extras.
+	$wp_customize->add_section(
+		'blogito_reading_extras',
+		array(
+			'title'       => esc_html__( 'Reading & Extras', 'blogito' ),
+			'priority'    => 1035,
+			'description' => esc_html__( 'Optional reading and layout features. Each one can be turned on or off on its own.', 'blogito' ),
+		)
+	);
+
+	$blogito_extras = array(
+		'blogito_reading_typography'    => array(
+			'label'       => esc_html__( 'Reading typography', 'blogito' ),
+			'description' => esc_html__( 'Larger text and a comfortable line length on posts and pages, and a cleaner heading scale on post cards.', 'blogito' ),
+		),
+		'blogito_reading_time'          => array(
+			'label'       => esc_html__( 'Reading time', 'blogito' ),
+			'description' => esc_html__( 'Shows an estimated reading time, such as "5 min read", next to the date on single posts.', 'blogito' ),
+		),
+		'blogito_author_box'            => array(
+			'label'       => esc_html__( 'Author box', 'blogito' ),
+			'description' => esc_html__( 'Shows the author\'s picture, name and bio after single posts. Only shown when the author has a bio.', 'blogito' ),
+		),
+		'blogito_wide_align'            => array(
+			'label'       => esc_html__( 'Wide and full width blocks', 'blogito' ),
+			'description' => esc_html__( 'Adds wide and full width options to blocks, shown on layouts without a sidebar, and makes embedded videos resize with the page.', 'blogito' ),
+		),
+		'blogito_back_to_top'           => array(
+			'label'       => esc_html__( 'Back to top button', 'blogito' ),
+			'description' => esc_html__( 'Shows a button to return to the top of the page after scrolling down.', 'blogito' ),
+		),
+		'blogito_progress_bar'          => array(
+			'label'       => esc_html__( 'Reading progress bar', 'blogito' ),
+			'description' => esc_html__( 'Shows a thin bar at the top of single posts that fills as the reader scrolls.', 'blogito' ),
+		),
+		'blogito_header_hide_on_scroll' => array(
+			'label'       => esc_html__( 'Hide header when scrolling down', 'blogito' ),
+			'description' => esc_html__( 'Slides the top bar away while scrolling down and brings it back when scrolling up. Turn off to keep it in view.', 'blogito' ),
+			'default'     => 1,
+		),
+		'blogito_card_hover'            => array(
+			'label'       => esc_html__( 'Card hover effect', 'blogito' ),
+			'description' => esc_html__( 'Lifts post cards slightly on blog and archive pages when they are hovered or focused.', 'blogito' ),
+		),
+	);
+
+	foreach ( $blogito_extras as $blogito_id => $blogito_extra ) {
+		$wp_customize->add_setting(
+			$blogito_id,
+			array(
+				'default'           => isset( $blogito_extra['default'] ) ? $blogito_extra['default'] : 0,
+				'sanitize_callback' => 'wp_validate_boolean',
+			)
+		);
+
+		$wp_customize->add_control(
+			$blogito_id,
+			array(
+				'label'       => $blogito_extra['label'],
+				'description' => $blogito_extra['description'],
+				'section'     => 'blogito_reading_extras',
+				'type'        => 'checkbox',
+			)
+		);
+	}
 }
 
 add_action( 'customize_register', 'blogito_customize_register' );
