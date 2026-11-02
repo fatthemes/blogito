@@ -60,6 +60,13 @@ function blogito_register_required_plugins() {
 			'slug'      => 'jetpack',
 			'required'  => false,
 		),
+
+		// WooCommerce from WordPress Plugin Repository.
+		array(
+			'name'     => esc_html__( 'WooCommerce', 'blogito' ),
+			'slug'     => 'woocommerce',
+			'required' => false,
+		),
 	);
 
 	/**

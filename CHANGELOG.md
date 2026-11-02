@@ -17,6 +17,11 @@
 - Added block editor styles and wide/full alignment support
 - Added an option to turn off the header hiding on scroll
 - New features are off by default on existing sites
+- Added WooCommerce support: shop, product, cart, checkout and My Account pages styled to match the theme
+- Added a header cart link with an item count, shown when WooCommerce is active
+- Added a Shop Sidebar widget area and shop options (Customizer → WooCommerce (Blogito))
+- Added WooCommerce to the recommended plugins
+- Sites already using WooCommerce will see their shop restyled
 
 ## [1.6.2] - 2024-09-13
 - Removed `theme.json` to resolve conflicts with block editor styles.
