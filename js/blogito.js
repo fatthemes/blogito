@@ -122,7 +122,8 @@
 
 // Single Image
 	    $( 'a[href*=".jpg"], a[href*=".jpeg"], a[href*=".png"], a[href*=".gif"]' ).each( function () {
-		if ( $( this ).parents( '.gallery' ).length === 0 && $( this ).parents( '.wp-block-gallery' ).length === 0 ) {
+		// WooCommerce opens product gallery images in its own lightbox.
+		if ( $( this ).parents( '.gallery' ).length === 0 && $( this ).parents( '.wp-block-gallery' ).length === 0 && $( this ).parents( '.woocommerce-product-gallery' ).length === 0 ) {
 		    $( this ).magnificPopup( {
 			type: 'image',
 			image: {
@@ -384,7 +385,8 @@
 	    }
 	}
 
-	if ( blogitoPagination === 'ajax' ) {
+	// Only pages with a posts container (not shop pages) get Load more.
+	if ( blogitoPagination === 'ajax' && $blogitoContainer.length ) {
 	    // The number of the next page to load (/page/x/).
 	    var pageNum = parseInt( blogito.startPage, 10 ) + 1;
 

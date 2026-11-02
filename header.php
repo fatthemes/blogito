@@ -35,6 +35,11 @@
 			<button class="blogito-search-panel-close" title="<?php esc_attr_e( 'Close', 'blogito' ); ?>"><svg><path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path></svg></button>
 			<?php get_search_form(); ?>
 			</div>
+			<?php
+			if ( function_exists( 'blogito_woocommerce_cart_link' ) ) {
+				blogito_woocommerce_cart_link();
+			}
+			?>
 			<div class="menu-logo">
 			<?php
 			if ( has_custom_logo() ) :
